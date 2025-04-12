@@ -1,0 +1,1 @@
+<img src="{{ asset('images/logo_don_valentin.jpeg') }}" alt="Logo" class="img-fluid mx-auto d-block" style="height: 50px;">
