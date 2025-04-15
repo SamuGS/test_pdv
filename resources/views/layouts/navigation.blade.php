@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('dashboard')">
                         Usuarios
                     </x-nav-link>
+                    <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('dashboard')">
+                        Categorias
+                    </x-nav-link>
                 </div>
             </div>
 
