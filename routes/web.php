@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +16,10 @@ Route::get('/dashboard', function () {
 
 //TODO LO QUE YA NECESITE LOGUEARSE IRIA AQUI
 Route::middleware('auth')->group(function () {
+    //RUTAS DEL DASHBOARD
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
     //ADMINISTRACION DE PERFIL
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
