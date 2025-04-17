@@ -42,6 +42,11 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
+                    <a href="{{ route('roles.index') }}" class="nav-link text-white {{ request()->routeIs('roles.*') ? 'active bg-primary' : '' }}">
+                        Roles/Permisos
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Usuarios
                     </a>
@@ -90,12 +95,7 @@
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Reportes
                     </a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="{{ route('roles.index') }}" class="nav-link text-white {{ request()->routeIs('roles.*') ? 'active bg-primary' : '' }}">
-                        Roles/Permisos
-                    </a>
-                </li>
+                </li>                
             </ul>
         </aside>
 
