@@ -1,24 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h2 class="mb-4">Listado de Categorías</h2>
+<div class="container">
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Listado de Categorías</h2>
+            <a href="{{ route('categorias.create') }}" class="btn btn-success">Agregar Categoría</a>
+        </div>
+    </div>
 
-        <table class="table table-striped table-bordered table-hover text-center">
-            <thead class="table-dark">
-                <tr>    
-                    <th>ID</th>                            
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($categorias as $categoria)
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped table-bordered table-hover text-center">
+                <thead class="table-dark">
                     <tr>
-                        <td>{{ $categoria->id }}</td>                                    
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($categorias as $categoria)
+                    <tr>
+                        <td>{{ $categoria->id }}</td>
                         <td>{{ $categoria->nombre }}</td>
-                        <td>{{ $categoria->estado }}</td>                                    
+                        <td>{{ $categoria->estado }}</td>
                         <td>
                             <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-primary btn-sm">Editar</a>
                             <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display:inline;">
@@ -28,10 +35,10 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <a href="{{ route('categorias.create') }}" class="btn btn-success mt-3">Agregar Categoría</a>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 @endsection
