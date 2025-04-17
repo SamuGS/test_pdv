@@ -43,6 +43,11 @@
                         Usuarios
                     </a>
                 </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('roles.index') }}" class="nav-link text-white {{ request()->routeIs('roles.*') ? 'active bg-primary' : '' }}">
+                        Roles/Permisos
+                    </a>
+                </li>
             </ul>
         </aside>
 
