@@ -1,0 +1,76 @@
+:root {
+    --color-azul-oscuro: #2C3E50;
+    --color-azul-gris: #5D7D92;
+    --color-beige: #D5BFA7;
+    --color-verde: #A7B99A;
+}
+
+/* Estilo base del body */
+body {
+    background-color: #F8F9FA;
+    font-family: 'Figtree', sans-serif;
+}
+
+/* Sidebar */
+aside.bg-dark {
+    background-color: var(--color-azul-oscuro) !important;
+}
+
+/* Sidebar links */
+aside .nav-link {
+    color: white;
+}
+aside .nav-link:hover {
+    background-color: var(--color-azul-gris);
+    color: white;
+}
+aside .nav-link.active {
+    background-color: var(--color-verde);
+    color: #fff;
+}
+
+/* Topbar */
+.navbar {
+    background-color: var(--color-beige) !important;
+}
+
+/* Botones personalizados */
+.btn-primary {
+    background-color: var(--color-azul-oscuro);
+    border-color: var(--color-azul-oscuro);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-azul-gris);
+    border-color: var(--color-azul-gris);
+}
+
+/* Card */
+.card {
+    border-color: var(--color-verde);
+}
+
+.topbar {
+    background-color: #1f2937; /* gris oscuro */
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+    
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @vite('resources/css/global.css')
+
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -17,6 +19,19 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+<<<<<<< Updated upstream
+=======
+
+    <style>
+        /* Sidebar scrollable */
+        aside {
+            height: 100vh;
+            /* Full viewport height */
+            overflow-y: auto;
+            /* Enable vertical scroll if content overflows */
+        }
+    </style>
+>>>>>>> Stashed changes
 </head>
 
 <body class="bg-light">
@@ -43,6 +58,54 @@
                         Usuarios
                     </a>
                 </li>
+<<<<<<< Updated upstream
+=======
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Proveedores
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Clientes
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('categorias.index') }}" class="nav-link text-white {{ request()->routeIs('categorias.*') ? 'active bg-primary' : '' }}">
+                        Categorías
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Productos
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Compras
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Ventas
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Facturación
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Inventarios
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Reportes
+                    </a>
+                </li>
+>>>>>>> Stashed changes
             </ul>
         </aside>
 
