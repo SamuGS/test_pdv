@@ -23,7 +23,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // Retornando la vista de crear categoria
+        return view('usuarios.crear'); //return view('carpeta.nombre_archivo');
     }
 
     /**
@@ -32,6 +33,27 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        // Validando los datos
+        $request->validate([
+            'nombre' => 'required|string|max:50', // validación para nombre
+            'email' => 'required|email|unique:users,email|max:100', // validación para email
+            'password' => 'required|string|min:8|confirmed', // validación para contraseña
+            'password_confirmation' => 'required|string|min:6', // validación para confirmación de contraseña
+            //'rol' => 'required|string|max:50', // Validación para rol
+            'estado' => '1', // Validación para estado            
+        ]);
+        
+        // Creando el usuario
+        $categoria = User::create([
+            'nombre' => $request->nombre,
+            'nombre' => $request->email,
+            'password' => bcrypt($request->password),
+            'rol' => $request->rol,
+            'estado' => $request->estado,
+        ]);        
+        
+        // Redireccionando a la vista de usuarios
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     /**

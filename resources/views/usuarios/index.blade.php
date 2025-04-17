@@ -6,7 +6,7 @@
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h2 class="mb-0">Listado de Usuarios</h2>
-                <a href="#" class="btn btn-success">Agregar Usuario</a>
+                <a href="{{ route('users.create') }}" class="btn btn-success">Agregar Usuario</a>
             </div>
         </div>
 
