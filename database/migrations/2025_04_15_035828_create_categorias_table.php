@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->id()->autoIncrement()->unique();
             $table->string('nombre')->unique();
-            $table->string('estado');
+            $table->string('estado')->default('1'); // 1 = activo, 0 = inactivo
             $table->timestamps();
         });
     }
