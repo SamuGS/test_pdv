@@ -64,6 +64,8 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
             'password' => 'nullable|confirmed|min:8',
+            'estado' => 'required|boolean', // Validación para estado
+            'rol' => 'required|string|max:255', // Validación para rol
         ]);
 
         // Buscar el usuario
@@ -77,6 +79,9 @@ class UserController extends Controller
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
         }
+
+        $user->estado = $request->estado;
+        $user->rol = $request->rol;
 
         $user->save();
 
