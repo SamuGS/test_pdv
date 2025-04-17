@@ -1,16 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-<<<<<<< Updated upstream
-=======
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\RolePermissionController;
-use Spatie\Permission\Contracts\Role;
->>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('welcome');
