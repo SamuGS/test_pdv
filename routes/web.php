@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RolePermissionController;
+use Spatie\Permission\Contracts\Role;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
+
+    //ADMINISTRACIONES DE ROLES Y PERMISOS
+    Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
+    Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
+    Route::post('/roles/assign', [RolePermissionController::class, 'assignRoleToUser'])->name('roles.assign');
 
     //ADMINISTRACION DE PERFIL
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
