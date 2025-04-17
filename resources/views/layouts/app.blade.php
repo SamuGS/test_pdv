@@ -17,12 +17,20 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        /* Sidebar scrollable */
+        aside {
+            height: 100vh; /* Full viewport height */
+            overflow-y: auto; /* Enable vertical scroll if content overflows */
+        }
+    </style>
 </head>
 
 <body class="bg-light">
     <div class="d-flex">
         {{-- Sidebar --}}
-        <aside class="bg-dark text-white p-3 vh-100" style="width: 250px;">
+        <aside class="bg-dark text-white p-3" style="width: 250px;">
             <!-- Logo de la empresa en lugar de texto -->
             <div class="mb-4">
                 <img src="{{ asset('images/logo_don_valentin.jpeg') }}" alt="Logo de la Empresa" class="img-fluid rounded-circle" style="max-width: 200px;" />
@@ -34,13 +42,53 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Usuarios
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Proveedores
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Clientes
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
                     <a href="{{ route('categorias.index') }}" class="nav-link text-white {{ request()->routeIs('categorias.*') ? 'active bg-primary' : '' }}">
                         Categorías
                     </a>
                 </li>
                 <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
-                        Usuarios
+                        Productos
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Compras
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Ventas
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Facturación
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Inventarios
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                        Reportes
                     </a>
                 </li>
                 <li class="nav-item mb-2">
@@ -77,7 +125,6 @@
                         </ul>
                     </div>
                 </div>
-
             </nav>
 
             {{-- Page Content --}}
