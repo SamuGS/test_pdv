@@ -5,6 +5,9 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RolePermissionController;
+use Spatie\Permission\Contracts\Role;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +19,15 @@ Route::get('/dashboard', function () {
 
 //TODO LO QUE YA NECESITE LOGUEARSE IRIA AQUI
 Route::middleware('auth')->group(function () {
+    //RUTAS DEL DASHBOARD
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
+
+    //ADMINISTRACIONES DE ROLES Y PERMISOS
+    Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
+    Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
+    Route::post('/roles/assign', [RolePermissionController::class, 'assignRoleToUser'])->name('roles.assign');
 
     //ADMINISTRACION DE PERFIL
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -24,6 +36,8 @@ Route::middleware('auth')->group(function () {
 
     //ADMINISTRACION DE USUARIOS
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create'); // Crear usuario
+    Route::post('/users', [UserController::class, 'store'])->name('users.store'); // Guardar usuario
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
