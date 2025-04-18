@@ -1,33 +1,26 @@
-<!-- filepath: c:\xampp\htdocs\prueba1\resources\views\usuarios\editar.blade.php -->
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Datos del usuario') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <!-- Formulario de Actualización -->
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Agregar Categoría</h4>
+                </div>
+
+                <div class="card-body">
                     <form action="{{ route('categorias.store') }}" method="POST">
-                        @csrf                        
+                        @csrf
 
-                        <!-- Nombre -->
+                        <!-- Campo Nombre -->
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
+                            <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
-                        </div>                                                
+                        </div>
 
-<<<<<<< Updated upstream
-                        <!-- Botones -->
-                        <div class="text-center">                            
-                            <!-- Botón de enviar -->
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Crear</button>
-                            </div>
-=======
+
                         
                         <div class="d-flex justify-content-between mt-4">
                             <!-- Botón para Actualizar -->
@@ -35,16 +28,14 @@
 
                             <!-- Botón Cancelar -->
                             <a href="{{ route('categorias.index') }}" class="btn btn-secondary">Cancelar</a>
->>>>>>> Stashed changes
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
-<<<<<<< Updated upstream
-</x-app-layout>
-=======
-</div>
+
 @endsection
->>>>>>> Stashed changes
+
