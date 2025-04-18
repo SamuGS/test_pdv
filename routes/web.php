@@ -6,9 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\ProductoController;
 use App\Models\Proveedores;
 use Spatie\Permission\Contracts\Role;
 
@@ -65,6 +65,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create'); // Crear proveedores
     Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store'); // Guardar proveedores
 
+    //ADMINISTRACION DE PRODUCTOS
+    Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index'); // Listar productos
+    Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create'); // Crear producto
+    Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store'); // Guardar producto
+    Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit'); // Vista/Editar producto
+    Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update'); // Actualizar producto
+    Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy'); // Eliminar producto
 
 });
 
