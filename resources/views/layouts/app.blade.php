@@ -19,8 +19,6 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-<<<<<<< Updated upstream
-=======
 
     <style>
         /* Sidebar scrollable */
@@ -31,7 +29,7 @@
             /* Enable vertical scroll if content overflows */
         }
     </style>
->>>>>>> Stashed changes
+
 </head>
 
 <body class="bg-light">
@@ -49,17 +47,10 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('categorias.index') }}" class="nav-link text-white {{ request()->routeIs('categorias.*') ? 'active bg-primary' : '' }}">
-                        Categorías
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Usuarios
                     </a>
                 </li>
-<<<<<<< Updated upstream
-=======
                 <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Proveedores
@@ -105,7 +96,6 @@
                         Reportes
                     </a>
                 </li>
->>>>>>> Stashed changes
             </ul>
         </aside>
 
