@@ -60,14 +60,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
-
                     <a href="{{ route('proveedores.index') }}" class="nav-link text-white {{ request()->routeIs('proveedores.*') ? 'active bg-primary' : '' }}">
-
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
-
-
                         Proveedores
                     </a>
                 </li>
@@ -111,7 +104,7 @@
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Reportes
                     </a>
-                </li>                
+                </li>
             </ul>
         </aside>
 
