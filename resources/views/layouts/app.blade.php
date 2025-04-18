@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,6 +16,7 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -35,7 +36,7 @@
 <body class="bg-light">
     <div class="d-flex">
         {{-- Sidebar --}}
-        <aside class="bg-dark text-white p-3 vh-100" style="width: 250px;">
+        <aside class="bg-dark text-white p-3" style="width: 250px;">
             <!-- Logo de la empresa en lugar de texto -->
             <div class="mb-4">
                 <img src="{{ asset('images/logo_don_valentin.jpeg') }}" alt="Logo de la Empresa" class="img-fluid rounded-circle" style="max-width: 200px;" />
@@ -47,12 +48,26 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
+
+                    <a href="{{ route('roles.index') }}" class="nav-link text-white {{ request()->routeIs('roles.*') ? 'active bg-primary' : '' }}">
+                        Roles/Permisos
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Usuarios
                     </a>
                 </li>
                 <li class="nav-item mb-2">
+
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+
+                    <a href="{{ route('proveedores.index') }}" class="nav-link text-white {{ request()->routeIs('proveedores.*') ? 'active bg-primary' : '' }}">
+
+                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+
+
                         Proveedores
                     </a>
                 </li>
@@ -69,6 +84,7 @@
                 <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Productos
+
                     </a>
                 </li>
                 <li class="nav-item mb-2">
@@ -95,7 +111,7 @@
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Reportes
                     </a>
-                </li>
+                </li>                
             </ul>
         </aside>
 
@@ -123,9 +139,9 @@
                                 </form>
                             </li>
                         </ul>
+
                     </div>
                 </div>
-
             </nav>
 
             {{-- Page Content --}}
