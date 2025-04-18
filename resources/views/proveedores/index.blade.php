@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container">
-    <!-- Card para el botón Agregar Categoria -->
+    <!-- Card para el botón Agregar Proveedor-->
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="mb-0">Listado de Proveedores</h2>
-            <a href="" class="btn btn-success">Agregar Proveedores</a>
+            <a href="{{ route('proveedores.create') }}" class="btn btn-success">Agregar Proveedores</a>
         </div>
     </div>
-    <!-- Card para la tabla de usuarios -->
+    <!-- Card para la tabla de Proveedores -->
     <div class="card">
         <div class="card-body">
             <table class="table table-striped table-bordered table-hover text-center">

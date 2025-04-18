@@ -25,7 +25,8 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        //
+        // Retornando la vista de crear proveedores
+        return view('proveedores.crear'); //return view('carpeta.nombre_archivo');
     }
 
     /**
@@ -33,7 +34,25 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validando los datos
+        $request->validate([
+            'nombre' => 'required|string|max:255',  
+            'direccion' => 'required|string|max:255',  
+            'telefono' => 'required|string|max:9',    
+            'email' => 'required|string|max:255',    
+        ]);
+        
+        // Creando Proveedores
+        $proveedores = Proveedores::create([
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion,
+            'telefono' => $request->telefono,
+            'email' => $request->email,
+            'estado' => '1',
+        ]);        
+        
+        // Redireccionando a la vista de proveedores
+        return redirect()->route('proveedores.index')->with('success', 'Proveedores agregados exitosamente.');
     }
 
     /**
