@@ -51,7 +51,7 @@ aside .nav-link.active {
 }
 
 .topbar {
-    background-color: #1f2937; /* gris oscuro */
+    background-color: #1f2937 !important; /* gris oscuro */
     color: white;
     padding: 1rem 2rem;
     display: flex;
@@ -59,6 +59,8 @@ aside .nav-link.active {
     justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     font-family: 'Segoe UI', sans-serif;
+    height: 60px;
+    
 }
 
 .card {
@@ -73,4 +75,25 @@ aside .nav-link.active {
 
 .card:hover {
     transform: scale(1.02);
+}
+
+.sidebar-custom {
+    width: 250px;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 1050;
+        background-color: var(--color-azul-oscuro);
+    }
+
+    #sidebar.active {
+        transform: translateX(0);
+    }
 }
