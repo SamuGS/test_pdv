@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     @vite('resources/css/global.css')
 
-
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
@@ -65,7 +64,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                    <a href="{{ route('clientes.index') }}" class="nav-link text-white {{ request()->routeIs('clientes.*') ? 'active bg-primary' : '' }}">
                         Clientes
                     </a>
                 </li>

@@ -4,9 +4,12 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolePermissionController;
+use App\Models\Proveedores;
 use Spatie\Permission\Contracts\Role;
 
 Route::get('/', function () {
@@ -50,8 +53,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.destroy'); // Eliminar categoria
 
+     //ADMINISTRACION DE CLIENTES
+     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Listar clientes
+     Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create'); // Crear cliente
+    Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store'); // Guardar cliente
+
     //ADMINISTRACION DE PROVEEDORES
     Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index'); // Listar proveedores
+    Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create'); // Crear proveedores
+    Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store'); // Guardar proveedores
 
 });
 

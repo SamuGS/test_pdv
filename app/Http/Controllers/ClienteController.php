@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedores;
 use Illuminate\Http\Request;
+use App\Models\Clientes;
 
-class ProveedorController extends Controller
+class ClienteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
-        // Trayendo todas los proveedores
-        $proveedores = Proveedores::all();
+         // Trayendo todos los clientes
+         $clientes = Clientes::all();
 
-        //Retornando la vista de proveedores
-        return view('proveedores.index', compact('proveedores'));
+         //Retornando la vista de clientes
+         return view('clientes.index', compact('clientes'));
     }
 
     /**
@@ -25,8 +24,8 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        // Retornando la vista de crear proveedores
-        return view('proveedores.crear'); //return view('carpeta.nombre_archivo');
+        // Retornando la vista de agregar cliente
+        return view('clientes.crear'); //return view('carpeta.nombre_archivo');
     }
 
     /**
@@ -36,23 +35,21 @@ class ProveedorController extends Controller
     {
         // Validando los datos
         $request->validate([
-            'nombre' => 'required|string|max:255',  
-            'direccion' => 'required|string|max:255',  
-            'telefono' => 'required|string|max:9',    
-            'email' => 'required|string|max:255',    
+            'nombre' => 'required|string|max:255',
+            'telefono' => 'required|string|max:9',            
+            'direccion' => 'required|string|max:255',            
         ]);
         
-        // Creando Proveedores
-        $proveedores = Proveedores::create([
+        // Agregando cliente
+        $clientes = Clientes::create([
             'nombre' => $request->nombre,
-            'direccion' => $request->direccion,
             'telefono' => $request->telefono,
-            'email' => $request->email,
+            'direccion' => $request->direccion,
             'estado' => '1',
         ]);        
         
-        // Redireccionando a la vista de proveedores
-        return redirect()->route('proveedores.index')->with('success', 'Proveedores agregados exitosamente.');
+        // Redireccionando a la vista de clientes
+        return redirect()->route('clientes.index')->with('success', '¡Cliente agregado exitosamente!.');
     }
 
     /**

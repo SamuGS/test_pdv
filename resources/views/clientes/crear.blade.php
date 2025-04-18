@@ -7,11 +7,11 @@
         <div class="col-md-8">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Agregar Proveedor</h4>
+                    <h4 class="mb-0">Agregar cliente</h4>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('proveedores.store') }}" method="POST">
+                    <form action="{{ route('clientes.store') }}" method="POST">
                         @csrf
 
                         <!-- Campo Nombre -->
@@ -20,27 +20,21 @@
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
 
-                        <!-- Campo Dirección -->
-                        <div class="mb-3">
-                            <label for="direccion" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion" required>
-                        </div>
-
                         <!-- Campo Teléfono -->
                         <div class="mb-3">
                             <label for="telefono" class="form-label">Teléfono</label>
                             <input type="text" class="form-control" id="telefono" name="telefono" required>
                         </div>
 
-                        <!-- Campo Email-->
+                        <!-- Campo Dirección -->
                         <div class="mb-3">
-                            <label for="email" class="form-label">Correo Electrónico</label>
-                            <input type="text" class="form-control" id="email" name="email" required>
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
                         </div>
 
                         <!-- Botón -->
                         <div class="text-end">
-                            <button type="submit" class="btn btn-success">Agregar Proveedor</button>
+                            <button type="submit" class="btn btn-success">Agregar cliente</button>
                         </div>
                     </form>
                 </div>
