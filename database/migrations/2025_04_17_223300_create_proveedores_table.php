@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('proveedores', function (Blueprint $table) {
             $table->id()->autoIncrement()->unique();
             $table->string('nombre')->unique();
+            $table->string('direccion');
+            $table->string('telefono');
+            $table->string('email');
             $table->string('estado')->default('1'); // 1 = activo, 0 = inactivo
             $table->timestamps();
+
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categoria');
+        Schema::dropIfExists('proveedores');
     }
 };

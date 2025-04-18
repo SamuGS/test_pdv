@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container">
-    <!-- Card para el botón Agregar Categoria -->
+    <!-- Card para el botón Agregar Proveedor-->
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="mb-0">Listado de Categorías</h2>
-            <a href="{{ route('categorias.create') }}" class="btn btn-success">Agregar Categoría</a>
+            <h2 class="mb-0">Listado de Proveedores</h2>
+            <a href="{{ route('proveedores.create') }}" class="btn btn-success">Agregar Proveedores</a>
         </div>
     </div>
-    <!-- Card para la tabla de usuarios -->
+    <!-- Card para la tabla de Proveedores -->
     <div class="card">
         <div class="card-body">
             <table class="table table-striped table-bordered table-hover text-center">
@@ -17,19 +17,25 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Correo Electrónico</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($categorias as $categoria)
+                    @foreach($proveedores as $proveedores)
                     <tr>
-                        <td>{{ $categoria->id }}</td>
-                        <td>{{ $categoria->nombre }}</td>
-                        <td>{{ $categoria->estado }}</td>
+                        <td>{{ $proveedores->id }}</td>
+                        <td>{{ $proveedores->nombre }}</td>
+                        <td>{{ $proveedores->direccion }}</td>
+                        <td>{{ $proveedores->telefono }}</td>
+                        <td>{{ $proveedores->email}}</td>
+                        <td>{{ $proveedores->estado }}</td>
                         <td>
-                            <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-primary btn-sm">Editar</a>
-                            <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display:inline;">
+                            <a href="" class="btn btn-primary btn-sm">Editar</a>
+                            <form action="" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
