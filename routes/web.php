@@ -4,6 +4,13 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+<<<<<<< Updated upstream
+=======
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RolePermissionController;
+use Spatie\Permission\Contracts\Role;
+use App\Http\Controllers\ClienteController;
+>>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,6 +41,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit'); // Vista/Editar categoria
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.destroy'); // Eliminar categoria
+<<<<<<< Updated upstream
+=======
+
+    //ADMINISTRACION DE PROVEEDORES
+    Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index'); // Listar proveedores
+
+     //ADMINISTRACION DE CLIENTES
+     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Listar clientes
+     Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create'); // Crear cliente
+    Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store'); // Guardar cliente
+>>>>>>> Stashed changes
 });
 
 require __DIR__.'/auth.php';
