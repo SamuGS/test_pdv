@@ -20,9 +20,15 @@
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
 
-                        <!-- Botón -->
-                        <div class="text-end">
+
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <!-- Botón para Actualizar -->
                             <button type="submit" class="btn btn-success">Crear categoría</button>
+
+                            <!-- Botón Cancelar -->
+                            <a href="{{ route('categorias.index') }}" class="btn btn-secondary">Cancelar</a>
+
                         </div>
                     </form>
                 </div>
@@ -30,5 +36,6 @@
         </div>
 
     </div>
-</div>
+
 @endsection
+

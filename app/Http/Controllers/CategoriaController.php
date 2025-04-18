@@ -79,19 +79,20 @@ class CategoriaController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'estado' => 'required|string|max:1',
+            
         ]);
 
         // Buscar el usuario
         $categoria = Categoria::findOrFail($id);
 
         // Actualizar los datos del usuario
-        $categoria->nombre = $request->nombre;
-        $categoria->estado = $request->estado;        
+        $categoria->nombre = $request->nombre; 
+        $categoria->estado = $request->estado;     
 
         $categoria->save();
 
         // Redirigir con un mensaje de éxito
-        return redirect()->route('categorias.index')->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente.');
     }
 
     /**
@@ -103,15 +104,20 @@ class CategoriaController extends Controller
     }
 
     //ACTUALIZANDO ESTADO A 2 = INACTIVO
-    public function desactivando(string $id){
-        //BUSCANDO LA CATEGORIA
-        $categoria = Categoria::findOrFail($id);
+    public function desactivando(string $id)
+{
+    // BUSCANDO LA CATEGORIA
+    $categoria = Categoria::findOrFail($id);
 
-        //ACTUALIZANDO EL ESTADO A 2
-        $categoria->estado = '2';
-        $categoria->save();
+    // CAMBIANDO EL ESTADO
+    $categoria->estado = $categoria->estado == '1' ? '0' : '1';
+    $categoria->save();
 
-        //RETORNANDO A LA VISTA DE CATEGORIAS
-        return redirect()->route('categorias.index')->with('success', 'Categoria desactivada exitosamente.');
-    }
+    // MENSAJE DINÁMICO
+    $mensaje = $categoria->estado == '1' ? 'Categoría activada exitosamente.' : 'Categoría desactivada exitosamente.';
+
+    // RETORNANDO A LA VISTA
+    return redirect()->route('categorias.index')->with('success', $mensaje);
+}
+
 }
