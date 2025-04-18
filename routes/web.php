@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
