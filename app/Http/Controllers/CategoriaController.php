@@ -79,19 +79,20 @@ class CategoriaController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'estado' => 'required|string|max:1',
+            
         ]);
 
         // Buscar el usuario
         $categoria = Categoria::findOrFail($id);
 
         // Actualizar los datos del usuario
-        $categoria->nombre = $request->nombre;
-        $categoria->estado = $request->estado;        
+        $categoria->nombre = $request->nombre; 
+        $categoria->estado = $request->estado;     
 
         $categoria->save();
 
         // Redirigir con un mensaje de éxito
-        return redirect()->route('categorias.index')->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente.');
     }
 
     /**
