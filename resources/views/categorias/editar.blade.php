@@ -1,4 +1,9 @@
 @extends('layouts.app')
+<<<<<<< Updated upstream
+=======
+
+@section('content')
+>>>>>>> Stashed changes
 
 @section('content')
 <div class="container">
@@ -12,10 +17,34 @@
                 @csrf
                 @method('PUT')
 
+<<<<<<< Updated upstream
                 <!-- Nombre -->
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $categorias->nombre }}" required>
+=======
+                    <form action="{{ route('categorias.update', $categorias->id) }}" method="POST">
+                    @csrf
+                        @method('PUT')
+
+                        <!-- Nombre -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $categorias->nombre }}" required>
+                        </div>
+
+                        <!-- Nombre -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="estado" name="estado" value="{{ $categorias->estado }}" required>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                        </div>
+                    </form>
+>>>>>>> Stashed changes
                 </div>
                 <!-- Estado -->
                 <div class="mb-3">
@@ -36,5 +65,9 @@
 
         </div>
     </div>
+<<<<<<< Updated upstream
 </div>
 @endsection
+=======
+    @endsection
+>>>>>>> Stashed changes

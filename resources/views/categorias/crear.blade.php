@@ -20,16 +20,31 @@
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>                                                
 
+<<<<<<< Updated upstream
                         <!-- Botones -->
                         <div class="text-center">                            
                             <!-- Botón de enviar -->
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Crear</button>
                             </div>
+=======
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <!-- Botón para Actualizar -->
+                            <button type="submit" class="btn btn-success">Crear categoría</button>
+
+                            <!-- Botón Cancelar -->
+                            <a href="{{ route('categorias.index') }}" class="btn btn-secondary">Cancelar</a>
+>>>>>>> Stashed changes
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
 </x-app-layout>
+=======
+</div>
+@endsection
+>>>>>>> Stashed changes

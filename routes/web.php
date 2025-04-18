@@ -40,7 +40,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store'); // Guardar categoria
     Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit'); // Vista/Editar categoria
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
+<<<<<<< Updated upstream
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.destroy'); // Eliminar categoria
+=======
+    Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando'); // Eliminar categoria
+
+     //ADMINISTRACION DE CLIENTES
+     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Listar clientes
+     Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create'); // Crear cliente
+    Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store'); // Guardar cliente
+
+    //ADMINISTRACION DE PROVEEDORES
+    Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index'); // Listar proveedores
+    Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create'); // Crear proveedores
+    Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store'); // Guardar proveedores
+
+>>>>>>> Stashed changes
 });
 
 require __DIR__.'/auth.php';

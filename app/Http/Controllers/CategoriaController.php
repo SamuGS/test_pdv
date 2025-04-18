@@ -104,15 +104,20 @@ class CategoriaController extends Controller
     }
 
     //ACTUALIZANDO ESTADO A 2 = INACTIVO
-    public function desactivando(string $id){
-        //BUSCANDO LA CATEGORIA
-        $categoria = Categoria::findOrFail($id);
+    public function desactivando(string $id)
+{
+    // BUSCANDO LA CATEGORIA
+    $categoria = Categoria::findOrFail($id);
 
-        //ACTUALIZANDO EL ESTADO A 2
-        $categoria->estado = '2';
-        $categoria->save();
+    // CAMBIANDO EL ESTADO
+    $categoria->estado = $categoria->estado == '1' ? '0' : '1';
+    $categoria->save();
 
-        //RETORNANDO A LA VISTA DE CATEGORIAS
-        return redirect()->route('categorias.index')->with('success', 'Categoria desactivada exitosamente.');
-    }
+    // MENSAJE DINÁMICO
+    $mensaje = $categoria->estado == '1' ? 'Categoría activada exitosamente.' : 'Categoría desactivada exitosamente.';
+
+    // RETORNANDO A LA VISTA
+    return redirect()->route('categorias.index')->with('success', $mensaje);
+}
+
 }
