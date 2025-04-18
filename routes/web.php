@@ -51,7 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store'); // Guardar categoria
     Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit'); // Vista/Editar categoria
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
-    Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.destroy'); // Eliminar categoria
+
+    Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando'); // Eliminar categoria
+
 
      //ADMINISTRACION DE CLIENTES
      Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Listar clientes
@@ -70,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit'); // Vista/Editar producto
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update'); // Actualizar producto
     Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy'); // Eliminar producto
+
 });
 
 require __DIR__.'/auth.php';

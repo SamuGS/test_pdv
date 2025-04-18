@@ -1,5 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/*Estilo para quitar efecto*/
+.card:hover {
+    transform: none !important;
+    transition: none !important;
+}
+
+/*Estilo para encabezados de todos los módulos donde va el botón agregar*/
+.encabezadoModulo {
+    /*background-color: #e8f0e5;          /* Fondo claro, amigable */
+    padding: 1rem;                      /* Espaciado interno */
+    /*border-bottom: 2px solid #b5c4b1;   /* Línea divisora */
+    border-radius: 0.5rem 0.5rem 0 0;   /* Bordes redondeados arriba */
+    display: flex;                      /* Para alinear los elementos */
+    justify-content: space-between;     /* Espacio entre el título y el botón */
+    align-items: center;                /* Centrado vertical */
+}
+
+.encabezadoModulo h2 {
+    text-transform: uppercase;   /* Convierte el texto a mayúsculas */
+    font-weight: bold;           /* Hace el texto en negrita */
+    font-size: 2rem;             /* Aumenta el tamaño de la fuente */
+}
+
+/*Estilo universal para botón Agregar o insertar, el que agrega usuarios, categrorias, etc.*/
+.botonNuevo {
+    font-size: 1rem;              /* Aumentamos el tamaño de la fuente */
+    padding: 0.35rem 0.75rem;     /* Relleno ajustado */
+    display: inline-flex;         /* Alineamos íconos y texto */
+    align-items: center;         
+    justify-content: center;      /* Centra el ícono y el texto */
+    gap: 0.35rem;                 /* Espacio entre ícono y texto */
+    font-weight: 500;             /* Peso de la fuente */
+    min-width: 140px;             /* Ancho fijo */
+    height: 35px;                 /* Altura fija */
+    text-align: center;           /* Alinea texto e íconos en el centro */
+    border-radius: 5px;           /* Bordes redondeados */
+    background-color: #5D7D92;    /* Color verde para diferenciar los botones de "agregar" */
+    border: 1px solid #2C3E50;    /* Borde del mismo color verde */
+    color: white;                 /* Texto blanco */
+    transition: background-color 0.3s, border-color 0.3s;  /* Efecto suave al cambiar de color */
+}
+
+.botonNuevo:hover {
+    background-color: #A7B99A;   /* Color cuando se pasa el cursor */
+    border-color: #A7B99A;        /* Borde cambia al mismo color */
+}
+
+/*Estilo universal para botón de acciones: actualizar y cambiar*/
+.botonAcciones {
+    font-size: 1rem;              /* Aumentamos el tamaño de la fuente */
+    padding: 0.35rem 0.75rem;     /* Reducimos un poco el padding */
+    display: inline-flex;         /* Alineamos íconos y texto */
+    align-items: center;         
+    justify-content: center;      /* Centra el ícono y el texto */
+    gap: 0.35rem;                 /* Espacio entre ícono y texto */
+    font-weight: 500;             /* Peso de la fuente */
+    min-width: 140px;             /* Reducimos un poco el ancho */
+    height: 35px;                 /* Reducimos la altura */
+    text-align: center;           /* Alinea el texto y los íconos en el centro */
+    border-radius: 5px;           /* Bordes redondeados */
+}
+
+.boton1 {
+    background-color: #051d36;    /* Azul */
+    border: 1px solid #051d36;    /* Azul más oscuro */
+    color: white;
+}
+.boton1:hover {
+    background-color: #85b4e7;    /* Azul más oscuro al pasar el cursor */
+    border-color: #85b4e7; 
+    color: white;       /* Borde más oscuro */
+}
+.boton2:hover {
+    background-color: #bae8f1;    /* Azul más oscuro al pasar el cursor */
+    border-color: #85b4e7; 
+    color: rgb(2, 2, 2);       /* Borde más oscuro */
+}
+/* Estilo específico para el color del boton2 */
+
+
+
+
+
 
 
