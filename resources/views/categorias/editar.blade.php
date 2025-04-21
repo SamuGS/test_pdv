@@ -10,7 +10,7 @@
       <!-- Formulario de Actualización -->
       <form action="{{ route('categorias.update', $categorias->id) }}"
             method="POST"
-            id="form-edit"> <!-- ← Aquí -->
+            id="form-edit">
 
         @csrf
         @method('PUT')
@@ -50,7 +50,6 @@
 
         <!-- Botones -->
         <div class="d-flex justify-content-between mt-4">
-          <!-- Cambiamos el type a button y le damos un ID -->
           <button type="button"
                   class="btn btn-main"
                   id="btn-update">Actualizar</button>

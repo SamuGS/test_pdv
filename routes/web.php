@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
+<<<<<<< Updated upstream
     // Categorías
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
     Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create');
@@ -50,6 +51,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit');
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update');
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando');
+=======
+    //ADMINISTRACION DE CATEGORIAS
+    Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index'); // Listar categorias
+    Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create'); // Crear categoria
+    Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store'); // Guardar categoria
+    Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit'); // Vista/Editar categoria
+    Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
+    Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando'); // Eliminar categoria
+>>>>>>> Stashed changes
 
     // Clientes
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
