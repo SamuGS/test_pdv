@@ -17,6 +17,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <!-- Scripts -->
@@ -148,15 +150,16 @@
                 <div class="container-fluid">
                     @yield('content')
                 </div>
-                
+
             </main>
         </div>
     </div>
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     @vite('resources/js/sidebar.js')
+    @vite('resources/js/alertas.js')
 </body>
 
 </html>
