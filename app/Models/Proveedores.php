@@ -14,4 +14,11 @@ class Proveedores extends Model
         'email',  
         'estado',    
     ];
+
+    public function productos()
+    {
+        return $this->hasMany(Producto::class);
+    }
 }
+
+
