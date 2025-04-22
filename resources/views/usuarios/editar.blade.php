@@ -24,6 +24,17 @@
                     <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                 </div>
 
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select class="form-control" id="rol" name="rol" required>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->name }}" {{ isset($user) && $user->roles->first() && $user->roles->first()->name == $role->name ? 'selected' : '' }}>
+                                {{ $role->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <!-- Nueva Contraseña -->
                 <div class="mb-3">
                     <label for="password" class="form-label">Nueva Contraseña (opcional)</label>

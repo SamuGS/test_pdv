@@ -37,7 +37,13 @@
                                         Inactivo
                                     @endif               
                                 </td>
-                                <td>{{$user->rol}}</td>           
+                                <td>
+                                    @if ($user->roles->isNotEmpty())
+                                        {{ $user->roles->pluck('name')->join(', ') }}
+                                    @else
+                                        Sin rol
+                                    @endif
+                                </td>          
                                 <td>
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Editar</a>
                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">

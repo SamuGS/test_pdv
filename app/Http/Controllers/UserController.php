@@ -23,8 +23,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        // Obteniendo todos los roles
+        $roles = \Spatie\Permission\Models\Role::all();
+
         // Retornando la vista de crear categoria
-        return view('usuarios.crear'); //return view('carpeta.nombre_archivo');
+        return view('usuarios.crear', compact('roles')); //return view('carpeta.nombre_archivo');
     }
 
     /**
@@ -37,23 +40,23 @@ class UserController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:50', // validación para nombre
             'email' => 'required|email|unique:users,email|max:100', // validación para email
-            'password' => 'required|string|min:8|confirmed', // validación para contraseña
-            'password_confirmation' => 'required|string|min:6', // validación para confirmación de contraseña
-            //'rol' => 'required|string|max:50', // Validación para rol
-            'estado' => '1', // Validación para estado            
+            'password' => 'required|string|min:8|confirmed', // validación para contraseña            
+            'rol' => 'required|exists:roles,name', // Validación para rol               
         ]);
         
         // Creando el usuario
-        $categoria = User::create([
-            'nombre' => $request->nombre,
-            'nombre' => $request->email,
-            'password' => bcrypt($request->password),
-            'rol' => $request->rol,
-            'estado' => $request->estado,
-        ]);        
+        $user = User::create([
+            'name' => $request->nombre,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),               
+            'estado' => 1, // Guardando el estado         
+        ]);     
+        
+        // Asignando el rol al usuario
+        $user->syncRoles($request->rol); // Asignar el rol al usuario
         
         // Redireccionando a la vista de usuarios
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
+        return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     /**
@@ -72,8 +75,11 @@ class UserController extends Controller
         //BUSCANDO EL USUARIO
         $user = User::findOrFail($id);
 
+        //OBTENER TODOS LOS ROLES
+        $roles = \Spatie\Permission\Models\Role::all();
+
         //RETORNANDO LA VISTA DE EDITAR USUARIO
-        return view('usuarios.editar', compact('user'));
+        return view('usuarios.editar', compact('user', 'roles'));
     }
 
     /**
@@ -81,14 +87,14 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         // Validar los datos del formulario
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|confirmed|min:8',
-            'estado' => 'required|boolean', // Validación para estado
+            'password' => 'nullable|confirmed|min:8',            
             'rol' => 'required|string|max:255', // Validación para rol
-        ]);
+        ]);        
 
         // Buscar el usuario
         $user = User::findOrFail($id);
@@ -102,10 +108,10 @@ class UserController extends Controller
             $user->password = bcrypt($request->password);
         }
 
-        $user->estado = $request->estado;
-        $user->rol = $request->rol;
-
         $user->save();
+
+        // Actualizar el rol del usuario
+        $user->syncRoles($request->rol); // Asignar el rol al usuario
 
         // Redirigir con un mensaje de éxito
         return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');

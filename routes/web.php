@@ -25,8 +25,7 @@ Route::middleware('auth')->group(function () {
 
     //ADMINISTRACIONES DE ROLES Y PERMISOS
     Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
-    Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
-    Route::post('/roles/assign', [RolePermissionController::class, 'assignRoleToUser'])->name('roles.assign');
+    Route::post('/roles/update-permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
 
     //ADMINISTRACION DE PERFIL
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
