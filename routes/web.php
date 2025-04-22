@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.destroy'); // Eliminar categoria
 
+<<<<<<< Updated upstream
      //ADMINISTRACION DE CLIENTES
      Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Listar clientes
      Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create'); // Crear cliente
@@ -62,6 +63,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create'); // Crear proveedores
     Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store'); // Guardar proveedores
 
+=======
+    // Clientes
+    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+    Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+    Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+    Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('clientes.edit'); // Vista/Editar Cliente
+    Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update'); // Actualizar Cliente
+    Route::delete('/clientes/{id}', [ClienteController::class, 'desactivando'])->name('clientes.desactivando'); // Eliminar cliente
+    // Proveedores
+    Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
+    Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create');
+    Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store');
+    // Productos
+    Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+    Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
+    Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
+    Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
+    Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
+    Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+>>>>>>> Stashed changes
 });
 
 require __DIR__.'/auth.php';
