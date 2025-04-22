@@ -64,8 +64,12 @@ class ClienteController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {        
+        //BUSCANDO CLIENTE
+        $clientes = Clientes::findOrFail($id);
+
+        //RETORNANDO LA VISTA DE EDITAR USUARIO
+        return view('clientes.editar', compact('clientes'));
     }
 
     /**
@@ -74,13 +78,50 @@ class ClienteController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'telefono' => 'required|string|max:9',            
+            'direccion' => 'required|string|max:255',
+            'estado' => 'required|string|max:1', 
+            
+        ]);
+
+        // Buscar el usuario
+        $clientes = Clientes::findOrFail($id);
+
+        // Actualizar los datos del usuario
+        $clientes->nombre = $request->nombre;
+        $clientes->telefono = $request->telefono; 
+        $clientes->direccion = $request->direccion; 
+        $clientes->estado = $request->estado;     
+        $clientes->save();
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
     }
+    
+    //ACTUALIZANDO ESTADO A 2 = INACTIVO
+    public function desactivando(string $id)
+{
+    // BUSCANDO LA CATEGORIA
+    $clientes = Clientes::findOrFail($id);
+
+    // CAMBIANDO EL ESTADO
+    $clientes->estado = $clientes->estado == '1' ? '0' : '1';
+    $clientes->save();
+
+    // MENSAJE DINÁMICO
+    $mensaje = $clientes->estado == '1' ? 'Cliente activado exitosamente.' : 'Cliente desactivado exitosamente.';
+
+    // RETORNANDO A LA VISTA
+    return redirect()->route('clientes.index')->with('success', $mensaje);
 }
+    
+}
+

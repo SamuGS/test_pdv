@@ -8,7 +8,11 @@ use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolePermissionController;
+
+use App\Models\Proveedores;
+use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\ProductoController;
+
 
 // Ruta de bienvenida
 Route::get('/', function () {
@@ -27,8 +31,7 @@ Route::middleware('auth')->group(function () {
 
     // Roles y permisos
     Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
-    Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
-    Route::post('/roles/assign', [RolePermissionController::class, 'assignRoleToUser'])->name('roles.assign');
+    Route::post('/roles/update-permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -57,11 +60,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
     Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
     Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+    Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('clientes.edit'); // Vista/Editar Cliente
+    Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update'); // Actualizar Cliente
+    Route::delete('/clientes/{id}', [ClienteController::class, 'desactivando'])->name('clientes.desactivando'); // Eliminar cliente
 
+  
     // Proveedores
     Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
     Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create');
     Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store');
+    Route::get('/proveedores/{id}/edit', [ProveedorController::class, 'edit'])->name('proveedores.edit'); // Vista/Editar proveedores
+    Route::put('/proveedores/{id}', [ProveedorController::class, 'update'])->name('proveedores.update'); // Actualizar proveedores
+    Route::delete('/proveedores/{id}', [ProveedorController::class, 'desactivando'])->name('proveedores.desactivando'); // Eliminar proveedores
 
     // Productos
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
@@ -70,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+
 });
 
 // Rutas de autenticación

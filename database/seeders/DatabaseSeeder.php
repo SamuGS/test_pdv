@@ -12,12 +12,11 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
-        // User::factory(10)->create();
+    {       
+        //Llamando al seeder para crear permisos y roles
+        $this->call(RolesAndPermissionsSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        //Llamando al seeder para crear usuario admin
+        $this->call(AdminUserSeeder::class);        
     }
 }
