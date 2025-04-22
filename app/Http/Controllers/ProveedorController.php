@@ -68,7 +68,11 @@ class ProveedorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+         //BUSCANDO EL PROVEEDOR
+         $proveedores = Proveedores::findOrFail($id);
+
+         //RETORNANDO LA VISTA DE EDITAR DE PROVEEDOR
+         return view('proveedores.editar', compact('proveedores'));
     }
 
     /**
@@ -77,6 +81,30 @@ class ProveedorController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',  
+            'direccion' => 'required|string|max:255',  
+            'telefono' => 'required|string|max:9',    
+            'email' => 'required|string|max:255', 
+            'estado' => 'required|string|max:1',
+            
+        ]);
+
+        // Buscar el usuario
+        $proveedores = Proveedores::findOrFail($id);
+
+        // Actualizar los datos del usuario
+        $proveedores->nombre = $request->nombre; 
+        $proveedores->direccion = $request->direccion; 
+        $proveedores->telefono= $request->telefono; 
+        $proveedores->email = $request->email; 
+        $proveedores->estado = $request->estado;     
+
+        $proveedores->save();
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado correctamente.');
     }
 
     /**
@@ -86,4 +114,19 @@ class ProveedorController extends Controller
     {
         //
     }
+    public function desactivando(string $id)
+{
+    // BUSCANDO LA CATEGORIA
+    $proveedores = Proveedores::findOrFail($id);
+
+    // CAMBIANDO EL ESTADO
+    $proveedores->estado = $proveedores->estado == '1' ? '0' : '1';
+    $proveedores->save();
+
+    // MENSAJE DINÁMICO
+    $mensaje = $proveedores->estado == '1' ? 'Proveedor activado exitosamente.' : 'Proveedor desactivado exitosamente.';
+
+    // RETORNANDO A LA VISTA
+    return redirect()->route('proveedores.index')->with('success', $mensaje);
+}
 }
