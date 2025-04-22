@@ -15,6 +15,9 @@ use App\Http\Controllers\ProductoController;
 use App\Models\Proveedores;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
