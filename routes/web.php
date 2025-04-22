@@ -27,8 +27,7 @@ Route::middleware('auth')->group(function () {
 
     // Roles y permisos
     Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
-    Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
-    Route::post('/roles/assign', [RolePermissionController::class, 'assignRoleToUser'])->name('roles.assign');
+    Route::post('/roles/update-permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,15 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
-<<<<<<< Updated upstream
-    // Categorías
-    Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
-    Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create');
-    Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
-    Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit');
-    Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update');
-    Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando');
-=======
     //ADMINISTRACION DE CATEGORIAS
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index'); // Listar categorias
     Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create'); // Crear categoria
@@ -59,7 +49,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit'); // Vista/Editar categoria
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando'); // Eliminar categoria
->>>>>>> Stashed changes
 
     // Clientes
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');

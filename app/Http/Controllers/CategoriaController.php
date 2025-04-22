@@ -6,7 +6,15 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
-{
+{   
+    public function __construct()
+    {
+            $this->middleware('permission:Ver categorias')->only('index');
+            $this->middleware('permission:Crear categorias')->only(['create', 'store']);
+            $this->middleware('permission:Editar categorias')->only(['edit', 'update']);
+            $this->middleware('permission:Eliminar categorias')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */
