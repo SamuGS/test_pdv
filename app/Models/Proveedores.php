@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Proveedores extends Model
 {
-    // MODELO DE CATEGORIA    
+    // MODELO DE PROVEEDOR   
     protected $fillable = [
         'nombre',
-        'estado',               
+        'direccion',  
+        'telefono',   
+        'email',  
+        'estado',    
     ];
 
     public function productos()
@@ -17,3 +20,5 @@ class Categoria extends Model
         return $this->hasMany(Producto::class);
     }
 }
+
+
