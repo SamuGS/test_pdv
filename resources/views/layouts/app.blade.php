@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 
+
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 
     <!-- Scripts -->
@@ -35,6 +35,8 @@
             /* Enable vertical scroll if content overflows */
         }
     </style>
+
+    @yield('css')
 
 </head>
 
@@ -162,6 +164,8 @@
 
     @vite('resources/js/sidebar.js')
     @vite('resources/js/alertas.js')
+
+    @yield('page_js')
 </body>
 
 </html>

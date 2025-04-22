@@ -7,10 +7,18 @@
             <h2 class="mb-0">Registrar usuario</h2>
         </div>
         <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <!-- Formulario de registro -->
             <form action="{{ route('users.store')}}" method="POST">
-                @csrf
-                @method('PUT')
+                @csrf                
 
                 <!-- Nombre -->
                 <div class="mb-3">
@@ -50,9 +58,9 @@
                 <div class="mb-3">
                     <label for="rol" class="form-label">Rol</label>
                     <select class="form-control" id="rol" name="rol" required>
-                        <option value="">Seleccione un rol</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Empleado</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
