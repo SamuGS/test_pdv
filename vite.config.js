@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/global.css', // <- Agrega esto
                 'resources/js/app.js',
+                'resources/js/sidebar.js', // <- Agrega esto
             ],
             refresh: true,
         }),

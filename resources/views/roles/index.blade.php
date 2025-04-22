@@ -4,58 +4,44 @@
     <div class="container">
         <h2 class="mb-4">Gestión de Roles y Permisos</h2>
 
-        <!-- Crear un nuevo rol -->
-        <form action="{{ route('roles.store') }}" method="POST" class="mb-4">
-            @csrf
+        <!-- Seleccionar un rol -->
+        <form action="{{ route('roles.index') }}" method="GET" class="mb-4">
             <div class="mb-3">
-                <label for="role" class="form-label">Nombre del Rol</label>
-                <input type="text" class="form-control" id="role" name="role" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Crear Rol</button>
-        </form>
-
-        <!-- Tabla de roles -->
-        <h3 class="mb-4">Listado de Roles</h3>
-        <table class="table table-striped table-bordered table-hover text-center">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($roles as $role)
-                    <tr>
-                        <td>{{ $role->id }}</td>
-                        <td>{{ $role->name }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <hr class="my-4">
-
-        <!-- Asignar un rol a un usuario -->
-        <h3 class="mb-4">Asignar Rol a Usuario</h3>
-        <form action="{{ route('roles.assign') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="user_id" class="form-label">Usuario</label>
-                <select class="form-control" id="user_id" name="user_id" required>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="role" class="form-label">Rol</label>
-                <select class="form-control" id="role" name="role" required>
+                <label for="role_id" class="form-label">Seleccionar Rol</label>
+                <select class="form-control" id="role_id" name="role_id" onchange="this.form.submit()">
+                    <option value="">-- Selecciona un Rol --</option>
                     @foreach ($roles as $role)
-                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        <option value="{{ $role->id }}" {{ isset($selectedRole) && $selectedRole->id == $role->id ? 'selected' : '' }}>
+                            {{ $role->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-success">Asignar Rol</button>
         </form>
+
+        @if (isset($selectedRole))
+            <h3 class="mb-4">Permisos para el Rol: {{ $selectedRole->name }}</h3>
+
+            <!-- Formulario para actualizar permisos -->
+            <form action="{{ route('roles.update.permissions') }}" method="POST">
+                @csrf
+                <input type="hidden" name="role_id" value="{{ $selectedRole->id }}">
+
+                <div class="mb-3">
+                    @foreach ($permissions as $permission)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permission_{{ $permission->id }}" name="permissions[]"
+                                value="{{ $permission->name }}"
+                                {{ $selectedRole->hasPermissionTo($permission->name) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="permission_{{ $permission->id }}">
+                                {{ $permission->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+
+                <button type="submit" class="btn btn-success">Actualizar Permisos</button>
+            </form>
+        @endif
     </div>
 @endsection
