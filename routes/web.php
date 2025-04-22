@@ -8,7 +8,11 @@ use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolePermissionController;
+
+use App\Models\Proveedores;
+use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\ProductoController;
+
 
 // Ruta de bienvenida
 Route::get('/', function () {
@@ -57,10 +61,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('clientes.edit'); // Vista/Editar Cliente
     Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update'); // Actualizar Cliente
     Route::delete('/clientes/{id}', [ClienteController::class, 'desactivando'])->name('clientes.desactivando'); // Eliminar cliente
+
+  
     // Proveedores
     Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
     Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create');
     Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store');
+    Route::get('/proveedores/{id}/edit', [ProveedorController::class, 'edit'])->name('proveedores.edit'); // Vista/Editar proveedores
+    Route::put('/proveedores/{id}', [ProveedorController::class, 'update'])->name('proveedores.update'); // Actualizar proveedores
+    Route::delete('/proveedores/{id}', [ProveedorController::class, 'desactivando'])->name('proveedores.desactivando'); // Eliminar proveedores
 
     // Productos
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
