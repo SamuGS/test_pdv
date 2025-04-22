@@ -9,8 +9,8 @@
     <div class="card-body">
       <!-- Formulario de Actualización -->
       <form action="{{ route('categorias.update', $categorias->id) }}"
-            method="POST"
-            id="form-edit">
+        method="POST"
+        id="form-edit">
 
         @csrf
         @method('PUT')
@@ -23,11 +23,11 @@
               <i class="bi bi-tag-fill"></i>
             </span>
             <input type="text"
-                   class="form-control border-start-0 rounded-end-pill"
-                   id="nombre"
-                   name="nombre"
-                   value="{{ $categorias->nombre }}"
-                   required>
+              class="form-control border-start-0 rounded-end-pill"
+              id="nombre"
+              name="nombre"
+              value="{{ $categorias->nombre }}"
+              required>
           </div>
         </div>
 
@@ -39,23 +39,22 @@
               <i class="bi bi-toggle-on"></i>
             </span>
             <input type="text"
-                   class="form-control border-start-0 rounded-end-pill"
-                   value="{{ $categorias->estado == 1 ? 'Activo' : 'Inactivo' }}"
-                   readonly>
+              class="form-control border-start-0 rounded-end-pill"
+              value="{{ $categorias->estado == 1 ? 'Activo' : 'Inactivo' }}"
+              readonly>
             <input type="hidden"
-                   name="estado"
-                   value="{{ $categorias->estado }}">
+              name="estado"
+              value="{{ $categorias->estado }}">
           </div>
         </div>
 
         <!-- Botones -->
-        <div class="d-flex justify-content-between mt-4">
-          <button type="button"
-                  class="btn btn-main"
-                  id="btn-update">Actualizar</button>
-
+        <div class="d-flex justify-content-end gap-2 mt-4">
           <a href="{{ route('categorias.index') }}"
-             class="btn btn-secondary-custom">Cancelar</a>
+            class="btn btn-secondary-custom">Cancelar</a>
+          <button type="button"
+            class="btn btn-main"
+            id="btn-update">Actualizar</button>
         </div>
       </form>
     </div>
