@@ -17,12 +17,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-<<<<<<< Updated upstream
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-=======
->>>>>>> Stashed changes
-
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -36,6 +32,8 @@
             /* Enable vertical scroll if content overflows */
         }
     </style>
+
+    @yield('css')
 
 </head>
 
@@ -163,6 +161,8 @@
 
     @vite('resources/js/sidebar.js')
     @vite('resources/js/alertas.js')
+
+    @yield('page_js')
 </body>
 
 </html>
