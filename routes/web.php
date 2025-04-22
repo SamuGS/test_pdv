@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
+
     //ADMINISTRACION DE CATEGORIAS
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index'); // Listar categorias
     Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create'); // Crear categoria
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorias/{id}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit'); // Vista/Editar categoria
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando'); // Eliminar categoria
+
 
     // Clientes
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
