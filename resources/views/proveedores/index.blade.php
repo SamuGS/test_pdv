@@ -3,17 +3,17 @@
 @section('content')
 <div class="container">
     <!-- Card para el botón Agregar Proveedor-->
-    <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card cardModulo">
+    <div class="encabezadoModulo">
             <h2 class="mb-0">Listado de Proveedores</h2>
-            <a href="{{ route('proveedores.create') }}" class="btn btn-success">Agregar Proveedores</a>
+            <a href="{{ route('proveedores.create') }}" class="btn botonNuevo"><i class="bi bi-plus-circle"></i>Agregar Proveedores</a>
         </div>
     </div>
     <!-- Card para la tabla de Proveedores -->
     <div class="card">
-        <div class="card-body">
-            <table class="table table-striped table-bordered table-hover text-center">
-                <thead class="table-dark">
+    <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+        <table class="tablaPersonalizada">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
@@ -21,7 +21,7 @@
                         <th>Teléfono</th>
                         <th>Correo Electrónico</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
+                        <th class="acciones">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,13 +32,16 @@
                         <td>{{ $proveedores->direccion }}</td>
                         <td>{{ $proveedores->telefono }}</td>
                         <td>{{ $proveedores->email}}</td>
-                        <td>{{ $proveedores->estado }}</td>
-                        <td>
-                            <a href="" class="btn btn-primary btn-sm">Editar</a>
-                            <form action="" method="POST" style="display:inline;">
+                        <td>{{ $proveedores->estado == '1' ? 'Activado' : 'Desactivado' }}</td>
+                        <td class="acciones">
+                            <a href="{{ route('proveedores.edit', $proveedores->id) }}" class="btn botonAcciones boton1"><i class="bi bi-pencil-square"></i>Actualizar</a>
+                            <form action="{{ route('proveedores.desactivando', $proveedores->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $proveedores->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                <button type="button" class="btn botonAcciones boton2 {{ $proveedores->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $proveedores->id }}">
+                                    <i class="bi {{ $proveedores->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
+                                    {{ $proveedores->estado == 1 ? 'Desactivar' : 'Activar' }}
+                                </button>
                             </form>
                         </td>
                     </tr>

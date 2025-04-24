@@ -1,5 +1,33 @@
 @extends('layouts.app')
 
+@section('page_css')
+<style>
+    .custom-file-input {
+        display: none;
+    }
+
+    .custom-file-label {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px 25px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .custom-file-label:hover {
+        background-color: #e0e0e0;
+        border-color: #999;
+    }
+
+    .custom-file-label::before {
+        content: "\f016"; /* FontAwesome icon for folder */
+        font-family: 'Font Awesome 5 Free';
+        margin-right: 5px;
+    }
+</style> 
+@endsection
+
 @section('content')
 <div class="container">
     <div class="card ">
@@ -81,18 +109,19 @@
 
                 <div class="mb-4">
                     <label for="imagen">Imagen del Producto</label>
-<<<<<<< Updated upstream
+
                     <input type="file" name="imagen" id="imagen" class="form-control-file">
-=======
+
                     <div class="input-group">
                         <span class="input-group-text rounded-start-pill"><i class="bi bi-upload"></i></i></span>
                     <input type="file" name="imagen" id="imagen" class="form-control-file" accept="image/*" onchange="previewImage(event)">
                     </div>
+
                 </div>
 
                 <div class="mt-2">
                     <img id="imagePreview" src="#" alt="Miniatura" style="display: none; max-width: 200px;"/>
->>>>>>> Stashed changes
+
                 </div>
 
                 <div class="d-flex justify-content-end">
@@ -103,4 +132,18 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_js')
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('imagePreview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }    
+</script>
 @endsection

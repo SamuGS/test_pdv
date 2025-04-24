@@ -14,17 +14,29 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {        
-        // Crear un rol
-        $role = Role::create(['name' => 'admin']);
+        // Crear permisos
+        $permissions = [
+            //Permisos categorias
+            'Ver categorias',
+            'Editar categorias',
+            'Crear categorias',
+            'Eliminar categorias',
 
-        // Crear un permiso
-        $permission = Permission::create(['name' => 'edit articles']);
+            //Permisos usuarios
+            'Ver usuarios',
+            'Editar usuarios',
+            'Crear usuarios',
+            'Eliminar usuarios',
 
-        // Asignar un permiso al rol
-        $role->givePermissionTo($permission);
+            //Permisos roles
+            'Ver roles',
+            'Editar roles',
+            'Crear roles',
+            'Eliminar roles', 
+        ];
 
-        // Asignar un rol a un usuario
-        $user = User::find(1); // Asegúrate de que el usuario con ID 1 exista
-        $user->assignRole('admin');
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
     }
 }

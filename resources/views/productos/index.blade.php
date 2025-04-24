@@ -25,9 +25,9 @@
     <!-- Card para la tabla de productos -->
     <div class="card">
 
+
         <div class="card-body" style="max-height: 400px; overflow-y: auto; white-space: normal;" id="resultados-productos">
             @include('productos.tabla', ['productos' => $productos])
-
         </div>
         {{ $productos->appends(['buscar' => request('buscar')])->links('vendor.pagination.bootstrap-5') }}
 
@@ -38,3 +38,4 @@
 @vite('resources/js/productos_busqueda.js')
 
 @yield('page_js')
+

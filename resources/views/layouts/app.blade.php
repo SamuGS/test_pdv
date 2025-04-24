@@ -19,6 +19,10 @@
 
 
 
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -31,6 +35,8 @@
             /* Enable vertical scroll if content overflows */
         }
     </style>
+
+    @yield('css')
 
 </head>
 
@@ -148,15 +154,18 @@
                 <div class="container-fluid">
                     @yield('content')
                 </div>
-                
+
             </main>
         </div>
     </div>
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     @vite('resources/js/sidebar.js')
+    @vite('resources/js/alertas.js')
+
+    @yield('page_js')
 </body>
 
 </html>
