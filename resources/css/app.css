@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 /*Estilo para quitar efecto*/
 .card:hover {
     transform: none !important;
@@ -79,10 +81,6 @@
     color: rgb(2, 2, 2);       /* Borde más oscuro */
 }
 /* Estilo específico para el color del boton2 */
-
-
-
-
 
 
 /*Estilo para quitar efecto*/
