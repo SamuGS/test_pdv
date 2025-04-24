@@ -12,24 +12,87 @@ class RolePermissionController extends Controller
 {
     public function index(Request $request)
     {
-        $roles = Role::all(); // Obtener todos los roles
-        $permissions = Permission::all(); // Obtener todos los permisos
-        $selectedRole = $request->role_id ? Role::find($request->role_id) : null; // Rol seleccionado
+        // Obtener el texto de búsqueda
+        $search = $request->input('search');
+
+        // Filtrar roles si se ingresó un texto de búsqueda
+        $roles = Role::when($search, function ($query, $search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        })->get();
+
+        // Si se envía la variable 'search', devolver siempre un JSON
+        if ($search) {
+            return response()->json(['roles' => $roles]);
+        }
+
+        // Obtener todos los permisos
+        $permissions = Permission::all();
+
+        // Rol seleccionado (si aplica)
+        $selectedRole = $request->role_id ? Role::find($request->role_id) : null;
 
         return view('roles.index', compact('roles', 'permissions', 'selectedRole'));
+    }
+
+    public function getRoles(Request $request)        
+    {
+        $query = $request->input('search');
+
+        // Filtrar roles si hay un término de búsqueda
+        if ($query) {
+            $roles = Role::where('name', 'LIKE', "%{$query}%")->get();
+        } else {
+            $roles = Role::all();
+        }
+
+        return response()->json(['roles' => $roles]);
+    }
+
+    public function getPermissions(Request $request)
+    {
+        // Verificar si se envió un role_id
+        $roleId = $request->input('role_id');
+        $role = Role::find($roleId);
+
+        if (!$role) {
+            return response()->json(['error' => 'Rol no encontrado'], 404);
+        }
+
+        // Obtener los permisos del rol
+        $permissions = Permission::all();
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
+
+        return response()->json([
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions,
+        ]);
+    }
+
+    public function create()
+    {
+        $permisos = Permission::all(); // Obtener todos los permisos
+        return view('roles.crear', compact('permisos')); // Pasar los permisos a la vista        
     }
 
     public function store(Request $request)
     {
         // Validar los datos de la solicitud
         $validated = $request->validate([
-            'role' => 'required|string|max:255|unique:roles,name', // El nombre del rol es obligatorio, único y debe ser una cadena
+            'nombre' => 'required|string|max:255|unique:roles,name', // Validar el nombre del rol
+            'permisos' => 'nullable|array', // Los permisos son opcionales
+            'permisos.*' => 'exists:permissions,name', // Validar que los permisos existan por nombre
         ]);
 
         // Crear el rol
-        Role::create(['name' => $validated['role']]);
+        $rol = Role::create(['name' => $validated['nombre']]);
 
-        return redirect()->back()->with('success', 'Rol creado correctamente.');
+        // Asignar permisos al rol (si se seleccionaron)
+        if ($request->has('permisos')) {
+            $rol->syncPermissions($validated['permisos']);
+        }
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('roles.index')->with('success', 'Rol creado correctamente.');
     }
 
     public function assignRoleToUser(Request $request)
