@@ -181,8 +181,7 @@ class ProductoController extends Controller
 
         $productos = Producto::where('nombre', 'LIKE', "%$query%")
             ->orWhere('descripcion', 'LIKE', "%$query%")
-            ->take(10)
-            ->get();
+            ->paginate(5);
 
         // Retorna la vista parcial con los resultados en HTML
     return view('productos.tabla', compact('productos'));
