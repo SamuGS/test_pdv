@@ -2,36 +2,42 @@
 
 @section('content')
 <div class="container">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Crear Nuevo Producto</h4>
+    <div class="card ">
+        <div class="card-header card-header-custom">
+            <h4 class="mb-0">Agregar Nuevo Producto</h4>
         </div>
-        <div class="card-body">
-            <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
+        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+            <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data" id="form-create">
                 @csrf
 
-                <div class="form-group mb-3">
+                <div class="mb-3">
                     <label for="nombre">Nombre del Producto</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" value="{{ old('nombre') }}" required>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-boxes"></i></span>
+                    <input type="text" name="nombre" id="nombre" class="form-control" required placeholder="Nombre del producto">
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
+                <div class="mb-3">
                     <label for="descripcion">Descripción</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-body-text"></i></span>
                     <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
+                <div class="mb-3">
                     <label for="precio">Precio</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-tags-fill"></i></span>
                     <input type="number" name="precio" id="precio" class="form-control" step="0.01" value="{{ old('precio') }}" required>
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="stock">Stock</label>
-                    <input type="number" name="stock" id="stock" class="form-control" value="{{ old('stock') }}" required>
-                </div>
-
-                <div class="form-group mb-3">
+                <div class="mb-3">
                     <label for="categoria_id">Categoría</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-tag-fill"></i></span>
                     <select name="categoria_id" id="categoria_id" class="form-control" required>
                         <option value="">Seleccione una categoría</option>
                         @foreach ($categorias as $categoria)
@@ -40,10 +46,13 @@
                             </option>
                         @endforeach
                     </select>
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
+                <div class="mb-3">
                     <label for="proveedor_id">Proveedor</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-person-fill"></i></span>
                     <select name="proveedor_id" id="proveedor_id" class="form-control" required>
                         <option value="">Seleccione un proveedor</option>
                         @foreach ($proveedores as $proveedor)
@@ -52,19 +61,38 @@
                             </option>
                         @endforeach
                     </select>
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="estado">Estado</label>
-                    <select name="estado" id="estado" class="form-control" required>
-                        <option value="1" {{ old('estado') == 1 ? 'selected' : '' }}>Activo</option>
-                        <option value="0" {{ old('estado') == 0 ? 'selected' : '' }}>Inactivo</option>
-                    </select>
+                <div class="mb-3">
+                    <label for="unidad_medida_id">Unidad de Medida</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-rulers"></i></span>
+                        <select name="unidad_medida_id" id="unidad_medida_id" class="form-control">
+                            <option value="">Seleccione una unidad de medida</option>
+                            @foreach ($unidadesMedida as $unidad)
+                                <option value="{{ $unidad->id }}" {{ old('unidad_medida_id') == $unidad->id ? 'selected' : '' }}>
+                                    {{ $unidad->nombre }} ({{ $unidad->abreviatura }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group mb-4">
+                <div class="mb-4">
                     <label for="imagen">Imagen del Producto</label>
+<<<<<<< Updated upstream
                     <input type="file" name="imagen" id="imagen" class="form-control-file">
+=======
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-upload"></i></i></span>
+                    <input type="file" name="imagen" id="imagen" class="form-control-file" accept="image/*" onchange="previewImage(event)">
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <img id="imagePreview" src="#" alt="Miniatura" style="display: none; max-width: 200px;"/>
+>>>>>>> Stashed changes
                 </div>
 
                 <div class="d-flex justify-content-end">

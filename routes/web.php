@@ -73,6 +73,19 @@ Route::middleware('auth')->group(function () {
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update'); // Actualizar producto
     Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy'); // Eliminar producto
 
+<<<<<<< Updated upstream
+=======
+    // Productos
+    Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+    Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
+    Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
+    Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
+    Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
+    Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+    Route::delete('/productos/{id}', [ProductoController::class, 'desactivando'])->name('productos.desactivando'); 
+    Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
+
+>>>>>>> Stashed changes
 });
 
 require __DIR__.'/auth.php';
