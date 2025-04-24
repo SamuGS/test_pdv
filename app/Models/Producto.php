@@ -19,6 +19,7 @@ class Producto extends Model
         'proveedor_id',
         'estado',
         'imagen', // Agregar el campo imagen
+        'unidad_medida_id', // Agregar el campo de unidad de medida
     ];
 
     // Relación con la categoría
@@ -31,5 +32,11 @@ class Producto extends Model
     public function proveedor()
     {
         return $this->belongsTo(Proveedores::class);
+    }
+
+    // Relación con la unidad de medida
+    public function unidadMedida()
+    {
+        return $this->belongsTo(UnidadMedida::class);
     }
 }
