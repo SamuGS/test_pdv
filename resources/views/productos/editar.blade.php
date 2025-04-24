@@ -174,14 +174,8 @@
                             <img id="imagePreview" class="img-thumbnail" style="height: 150px; display: none;">
                         </div>
                     </div>
-
-
                 </div>
-
-
         </div>
-
-
 
         <!-- Botones -->
         <div class="d-flex justify-content-between mt-4">
