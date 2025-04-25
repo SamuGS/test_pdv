@@ -310,6 +310,9 @@
   /* Estilo para el cierre de la alerta */
   .colored-toast .swal2-close {
     color: white !important;
+
+  }
+
   }
 
   /*ESTILOS PAGINACION */
@@ -329,3 +332,4 @@
     background-color: #0056b3;
     color: #fff;
 }
+

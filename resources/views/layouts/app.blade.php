@@ -88,7 +88,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                    <a href="{{ route('compras.index') }}" class="nav-link text-white {{ request()->routeIs('compras.*') ? 'active bg-primary' : '' }}">
                         Compras
                     </a>
                 </li>

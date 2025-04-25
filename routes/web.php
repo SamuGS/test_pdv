@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\DetalleCompraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
@@ -87,6 +89,16 @@ Route::middleware('auth')->group(function () {
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/productos/{id}', [ProductoController::class, 'desactivando'])->name('productos.desactivando'); 
     Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
+
+
+    //ADMINISTRACION DE COMPRAS
+    Route::get('/compras', [ComprasController::class, 'index'])->name('compras.index'); // Listar categorias
+    Route::get('/compras/create', [ComprasController::class, 'create'])->name('compras.create'); // Crear categoria
+    Route::post('/compras', [ComprasController::class, 'store'])->name('compras.store');
+
+
+    Route::get('/detallecompras/crear/{compra_id}', [DetalleCompraController::class, 'crear'])->name('detallecompras.crear');
+
 
 
 });
