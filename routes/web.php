@@ -33,7 +33,13 @@ Route::middleware('auth')->group(function () {
 
     // Roles y permisos
     Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
+    Route::get('/roles/create', [RolePermissionController::class, 'create'])->name('roles.create');
+    Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
+    Route::get('/roles/{id}/edit', [RolePermissionController::class, 'edit'])->name('roles.edit');
+    Route::put('/roles/{id}', [RolePermissionController::class, 'update'])->name('roles.update');
     Route::post('/roles/update-permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
+    Route::get('/roles/permissions', [RolePermissionController::class, 'getPermissions'])->name('roles.permissions'); //para solicitar permisos por ajax    
+    Route::get('/api/roles', [RolePermissionController::class, 'getRoles'])->name('roles.get');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -81,7 +87,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
-    Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+    Route::delete('/productos/{id}', [ProductoController::class, 'desactivando'])->name('productos.desactivando'); 
+    Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
+
 
     //ADMINISTRACION DE COMPRAS
     Route::get('/compras', [ComprasController::class, 'index'])->name('compras.index'); // Listar categorias
