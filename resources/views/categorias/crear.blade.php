@@ -22,10 +22,10 @@
                 </div>
 
                 <!-- Botones -->
-                <div class="d-flex justify-content-between mt-4">
-                    <button type="button" class="btn btn-main" id="btn-create">Crear categoría</button>
+                <div class="d-flex justify-content-end gap-2 mt-4">             
 
                     <a href="{{ route('categorias.index') }}" class="btn btn-secondary-custom">Cancelar</a>
+                    <button type="button" class="btn btn-main" id="btn-create">Crear categoría</button>
                 </div>
             </form>
         </div>

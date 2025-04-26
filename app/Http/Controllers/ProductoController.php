@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Proveedores;
+use App\Models\UnidadMedida;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -23,9 +25,7 @@ class ProductoController extends Controller
     public function index()
     {
         // Obtener todos los productos con sus relaciones
-        $productos = Producto::with('categoria', 'proveedor')->get();
-
-        // Retornar la vista con los productos
+        $productos = Producto::with('categoria', 'proveedor', 'unidadMedida')->paginate(5);
         return view('productos.index', compact('productos'));
     }
 
@@ -37,9 +37,10 @@ class ProductoController extends Controller
         // Obtener todas las categorías y proveedores
         $categorias = Categoria::all();
         $proveedores = Proveedores::all();
+        $unidadesMedida = UnidadMedida::all(); // Obtener todas las unidades de medida
 
         // Retornar la vista de creación con las categorías y proveedores
-        return view('productos.crear', compact('categorias', 'proveedores'));
+        return view('productos.crear', compact('categorias', 'proveedores', 'unidadesMedida'));
     }
 
     /**
@@ -52,11 +53,12 @@ class ProductoController extends Controller
             'nombre' => 'required|string|max:100',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
+            //'stock' => 'required|integer|min:0',
             'categoria_id' => 'required|exists:categorias,id',
             'proveedor_id' => 'required|exists:proveedores,id',
-            'estado' => 'required|boolean',
-            'imagen' => 'nullable|mimes:jpeg,jpg,png,gif,bmp,webp,svg|max:5120', // Validación para la imagen
+            //'estado' => 'required|boolean',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // Validar la imagen (opcional)
+            'unidad_medida_id' => 'nullable|exists:unidades_medida,id', // Validar la unidad de medida
         ]);
 
         // Manejar la subida de la imagen
@@ -70,11 +72,12 @@ class ProductoController extends Controller
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'precio' => $request->precio,
-            'stock' => $request->stock,
+            'stock' => '0',
             'categoria_id' => $request->categoria_id,
             'proveedor_id' => $request->proveedor_id,
-            'estado' => $request->estado,
+            'estado' => '1',
             'imagen' => $rutaImagen, // Guardar la ruta de la imagen
+            'unidad_medida_id' => $request->unidad_medida_id, // Guardar la unidad de medida
         ]);
 
         // Redirigir al listado de productos con un mensaje de éxito
@@ -102,9 +105,10 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($id);
         $categorias = Categoria::all();
         $proveedores = Proveedores::all();
+        $unidadesMedida = UnidadMedida::all(); // Obtener todas las unidades de medida
 
         // Retornar la vista de edición
-        return view('productos.edit', compact('producto', 'categorias', 'proveedores'));
+        return view('productos.editar', compact('producto', 'categorias', 'proveedores', 'unidadesMedida'));
     }
 
     /**
@@ -112,22 +116,40 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:100',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
             'categoria_id' => 'required|exists:categorias,id',
             'proveedor_id' => 'required|exists:proveedores,id',
-            'estado' => 'required|boolean',
+            'unidad_medida_id' => 'nullable|exists:unidades_medida,id',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // Validar la imagen (opcional)
         ]);
 
-        // Buscar el producto y actualizarlo
         $producto = Producto::findOrFail($id);
-        $producto->update($request->all());
 
-        // Redirigir al listado de productos con un mensaje de éxito
+        // Manejar la imagen
+        if ($request->hasFile('imagen')) {
+            // Eliminar la imagen anterior si existe
+            if ($producto->imagen) {
+                Storage::disk('public')->delete($producto->imagen);
+            }
+
+            // Guardar la nueva imagen
+            $rutaImagen = $request->file('imagen')->store('imagenes_productos', 'public');
+            $producto->imagen = $rutaImagen;
+        }
+
+        // Actualizar los demás campos
+        $producto->update([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'categoria_id' => $request->categoria_id,
+            'proveedor_id' => $request->proveedor_id,
+            'unidad_medida_id' => $request->unidad_medida_id,
+        ]);
+
         return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
@@ -142,5 +164,35 @@ class ProductoController extends Controller
 
         // Redirigir al listado de productos con un mensaje de éxito
         return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
+    }
+
+    //ACTUALIZANDO ESTADO A 2 = INACTIVO
+    public function desactivando(string $id)
+    {
+        // BUSCANDO LA CATEGORIA
+        $producto = Producto::findOrFail($id);
+
+        // CAMBIANDO EL ESTADO
+        $producto->estado = $producto->estado == '1' ? '0' : '1';
+        $producto->save();
+
+        // MENSAJE DINÁMICO
+        $mensaje = $producto->estado == '1' ? 'Producto activado exitosamente.' : 'Producto desactivado exitosamente.';
+
+        // RETORNANDO A LA VISTA
+        return redirect()->route('productos.index')->with('success', $mensaje);
+    }
+    // BUSCANDO PRODUCTOS
+    public function buscar(Request $request)
+    {
+        $query = $request->input('query');
+
+        $productos = Producto::where('nombre', 'LIKE', "%$query%")
+            ->orWhere('descripcion', 'LIKE', "%$query%")
+            ->take(10)
+            ->get();
+
+        // Retorna la vista parcial con los resultados en HTML
+    return view('productos.tabla', compact('productos'));
     }
 }

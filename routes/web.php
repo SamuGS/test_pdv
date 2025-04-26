@@ -2,13 +2,19 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\DetalleCompraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolePermissionController;
+
+use App\Models\Proveedores;
+use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\ProductoController;
+
 
 // Ruta de bienvenida
 Route::get('/', function () {
@@ -47,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');    
     Route::delete('users/{id}/desactivando', [UserController::class, 'desactivando'])->name('usuarios.desactivando');
 
+
     //ADMINISTRACION DE CATEGORIAS
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index'); // Listar categorias
     Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create'); // Crear categoria
@@ -55,15 +62,23 @@ Route::middleware('auth')->group(function () {
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update'); // Actualizar categoria
     Route::delete('/categorias/{id}', [CategoriaController::class, 'desactivando'])->name('categorias.desactivando'); // Eliminar categoria
 
+
     // Clientes
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
     Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
     Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+    Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('clientes.edit'); // Vista/Editar Cliente
+    Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update'); // Actualizar Cliente
+    Route::delete('/clientes/{id}', [ClienteController::class, 'desactivando'])->name('clientes.desactivando'); // Eliminar cliente
 
+  
     // Proveedores
     Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
     Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create');
     Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store');
+    Route::get('/proveedores/{id}/edit', [ProveedorController::class, 'edit'])->name('proveedores.edit'); // Vista/Editar proveedores
+    Route::put('/proveedores/{id}', [ProveedorController::class, 'update'])->name('proveedores.update'); // Actualizar proveedores
+    Route::delete('/proveedores/{id}', [ProveedorController::class, 'desactivando'])->name('proveedores.desactivando'); // Eliminar proveedores
 
     // Productos
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
@@ -71,7 +86,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
-    Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+    Route::delete('/productos/{id}', [ProductoController::class, 'desactivando'])->name('productos.desactivando'); 
+    Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
+
+
+    //ADMINISTRACION DE COMPRAS
+    Route::get('/compras', [ComprasController::class, 'index'])->name('compras.index'); // Listar categorias
+    Route::get('/compras/create', [ComprasController::class, 'create'])->name('compras.create'); // Crear categoria
+    Route::post('/compras', [ComprasController::class, 'store'])->name('compras.store');
+
+
+    Route::get('/detallecompras/crear/{compra_id}', [DetalleCompraController::class, 'crear'])->name('detallecompras.crear');
+
+
+
 });
 
 // Rutas de autenticación
