@@ -3,10 +3,12 @@
 @section('content')
 <div class="container">
     <!-- Card para el botón Agregar Usuario -->
-    <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card cardModulo">
+        <div class="encabezadoModulo">
             <h2 class="mb-0">Listado de Usuarios</h2>
-            <a href="{{ route('users.create') }}" class="btn btn-success">Agregar Usuario</a>
+            <a href="{{ route('users.create') }}" class="btn botonNuevo">
+                <i class="bi bi-plus-circle"></i> Agregar Usuario
+            </a>
         </div>
     </div>
 
@@ -14,10 +16,9 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover text-center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>N°</th>
+                <table class="tablaPersonalizada">
+                    <thead>
+                        <tr>                            
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Estado</th>
@@ -27,8 +28,7 @@
                     </thead>
                     <tbody>
                         @foreach($users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
+                        <tr>                            
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -38,13 +38,24 @@
                                 Inactivo
                                 @endif
                             </td>
-                            <td>{{$user->rol}}</td>
                             <td>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Editar</a>
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                @foreach($user->getRoleNames() as $role)
+                                    {{ $role }} <!-- Muestra todos los roles del usuario -->
+                                @endforeach
+                            </td>
+                            <td>
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn botonAcciones boton1">
+                                    <i class="bi bi-pencil-square"></i> Actualizar
+                                </a>
+                            
+                                <!-- Formulario para Eliminar -->
+                                <form action="{{ route('usuarios.desactivando', $user->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $user->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    <button type="button" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $user->id }}">
+                                        <i class="bi {{ $user->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
+                                        {{ $user->estado == 1 ? 'Desactivar' : 'Activar' }}
+                                    </button>
                                 </form>
                             </td>
                         </tr>

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\DetalleCompraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
@@ -35,10 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles/create', [RolePermissionController::class, 'create'])->name('roles.create');
     Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
     Route::get('/roles/{id}/edit', [RolePermissionController::class, 'edit'])->name('roles.edit');
-    Route::put('/roles/{id}', [RolePermissionController::class, 'update'])->name('roles.update');
-    Route::post('/roles/update-permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
-    Route::get('/roles/permissions', [RolePermissionController::class, 'getPermissions'])->name('roles.permissions'); //para solicitar permisos por ajax    
-    Route::get('/api/roles', [RolePermissionController::class, 'getRoles'])->name('roles.get');
+    Route::get('/api/roles/{roleId}/permissions', [RolePermissionController::class, 'getPermissionsByRole'])->name('roles.get.permissions');
+    Route::put('/roles/{id}/permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
+    Route::patch('/roles/{role}/toggle', [RolePermissionController::class, 'toggleEstado'])->name('roles.toggleEstado');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -50,8 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');    
+    Route::delete('users/{id}/desactivando', [UserController::class, 'desactivando'])->name('usuarios.desactivando');
 
 
     //ADMINISTRACION DE CATEGORIAS
@@ -90,6 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
 
 
+
     //Administración de ventas
     Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
     Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
@@ -106,6 +108,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/ventas/agregar-al-carrito/{productoId}', [VentaController::class, 'agregarProducto']);
     Route::get('/ventas/ver-carrito', [VentaController::class, 'verCarrito']);
     Route::get('/ventas/eliminar-del-carrito/{productoId}', [VentaController::class, 'eliminarDelCarrito']);
+
+    //ADMINISTRACION DE COMPRAS
+    Route::get('/compras', [ComprasController::class, 'index'])->name('compras.index'); // Listar categorias
+    Route::get('/compras/create', [ComprasController::class, 'create'])->name('compras.create'); // Crear categoria
+    Route::post('/compras', [ComprasController::class, 'store'])->name('compras.store');
+
+
+    Route::get('/detallecompras/crear/{compra_id}', [DetalleCompraController::class, 'crear'])->name('detallecompras.crear');
+
+
+
 });
 
 // Rutas de autenticación
