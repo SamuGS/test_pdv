@@ -10,6 +10,14 @@ use Spatie\Permission\Models\Permission;
 
 class RolePermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Ver roles')->only('index');
+        $this->middleware('permission:Crear roles')->only(['create', 'store']);
+        $this->middleware('permission:Editar roles')->only('updatePermissions');
+        $this->middleware('permission:Eliminar roles')->only('toggleEstado');
+    }
+    
     public function index(Request $request)
     {
         // Obtener el texto de búsqueda

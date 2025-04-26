@@ -108,9 +108,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="imagen">Imagen del Producto</label>
-
-                    <input type="file" name="imagen" id="imagen" class="form-control-file">
+                    <label for="imagen">Imagen del Producto</label>                  
 
                     <div class="input-group">
                         <span class="input-group-text rounded-start-pill"><i class="bi bi-upload"></i></i></span>

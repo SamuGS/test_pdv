@@ -16,30 +16,9 @@ class RolesAndPermissionsSeeder extends Seeder
     {        
         // Crear permisos
         $permissions = [
-            //Permisos categorias
-            'Ver categorias',
-            'Editar categorias',
-            'Crear categorias',
-            'Eliminar categorias',
-
-            //Permisos clientes
-            'Ver clientes',
-            'Editar clientes',
-            'Crear clientes',
-            'Eliminar clientes',
-
-            //Permisos productos
-            'Ver productos',
-            'Editar productos',
-            'Crear productos',
-            'Eliminar productos',
-
-            //Permisos proveedores
-            'Ver proveedores',
-            'Editar proveedores',
-            'Crear proveedores',
-            'Eliminar proveedores',
-
+            //Permisos dashboard
+            'Ver dashboard',     
+            
             //Permisos roles
             'Ver roles',
             'Editar roles',
@@ -51,12 +30,36 @@ class RolesAndPermissionsSeeder extends Seeder
             'Editar usuarios',
             'Crear usuarios',
             'Eliminar usuarios',
+
+            //Permisos proveedores
+            'Ver proveedores',
+            'Editar proveedores',
+            'Crear proveedores',
+            'Eliminar proveedores',
+
+            //Permisos clientes
+            'Ver clientes',
+            'Editar clientes',
+            'Crear clientes',
+            'Eliminar clientes',
             
-            //Permisos dashboard
-            'Ver dashboard',
-            'Editar dashboard',
-            'Crear dashboard',
-            'Eliminar dashboard',
+            //Permisos categorias
+            'Ver categorias',
+            'Editar categorias',
+            'Crear categorias',
+            'Eliminar categorias',            
+
+            //Permisos productos
+            'Ver productos',
+            'Editar productos',
+            'Crear productos',
+            'Eliminar productos',                                                            
+
+            //Permisos compras
+            'Ver compras',
+            'Editar compras',
+            'Crear compras',
+            'Eliminar compras',
         ];
 
         foreach ($permissions as $permission) {
