@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Ver usuarios')->only(['index', 'show']);
+        $this->middleware('permission:Crear usuarios')->only(['create', 'store']);
+        $this->middleware('permission:Editar usuarios')->only(['edit', 'update']);
+        $this->middleware('permission:Eliminar usuarios')->only(['destroy', 'desactivando']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -130,5 +137,20 @@ class UserController extends Controller
 
         // Redirigir con un mensaje de éxito
         return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente.');
+    }
+
+    public function desactivando(string $id)
+    {
+        // Buscar el usuario por su ID
+        $user = User::findOrFail($id);
+
+        // Cambiar el estado del usuario
+        $user->estado = $user->estado == 1 ? 0 : 1;
+
+        // Guardar el cambio
+        $user->save();
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('users.index')->with('success', 'Estado del usuario actualizado correctamente.');
     }
 }

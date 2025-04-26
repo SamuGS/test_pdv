@@ -8,6 +8,11 @@ use App\Models\Categoria;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Ver dashboard')->only('index');
+    }
+    
     public function index()
     {
         $usuarios = User::count();

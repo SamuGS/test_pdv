@@ -93,22 +93,22 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                    <a href="" class="nav-link text-white">
                         Ventas
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                    <a href="" class="nav-link text-white">
                         Facturación
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                    <a href="" class="nav-link text-white">
                         Inventarios
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
+                    <a href="" class="nav-link text-white">
                         Reportes
                     </a>
                 </li>

@@ -36,10 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles/create', [RolePermissionController::class, 'create'])->name('roles.create');
     Route::post('/roles', [RolePermissionController::class, 'store'])->name('roles.store');
     Route::get('/roles/{id}/edit', [RolePermissionController::class, 'edit'])->name('roles.edit');
-    Route::put('/roles/{id}', [RolePermissionController::class, 'update'])->name('roles.update');
-    Route::post('/roles/update-permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
-    Route::get('/roles/permissions', [RolePermissionController::class, 'getPermissions'])->name('roles.permissions'); //para solicitar permisos por ajax    
-    Route::get('/api/roles', [RolePermissionController::class, 'getRoles'])->name('roles.get');
+    Route::get('/api/roles/{roleId}/permissions', [RolePermissionController::class, 'getPermissionsByRole'])->name('roles.get.permissions');
+    Route::put('/roles/{id}/permissions', [RolePermissionController::class, 'updatePermissions'])->name('roles.update.permissions');
+    Route::patch('/roles/{role}/toggle', [RolePermissionController::class, 'toggleEstado'])->name('roles.toggleEstado');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,8 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');    
+    Route::delete('users/{id}/desactivando', [UserController::class, 'desactivando'])->name('usuarios.desactivando');
 
 
     //ADMINISTRACION DE CATEGORIAS
