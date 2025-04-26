@@ -8,6 +8,7 @@ use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\VentaController;
 
 use App\Models\Proveedores;
 use Spatie\Permission\Contracts\Role;
@@ -70,7 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update'); // Actualizar Cliente
     Route::delete('/clientes/{id}', [ClienteController::class, 'desactivando'])->name('clientes.desactivando'); // Eliminar cliente
 
-  
+
     // Proveedores
     Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
     Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create');
@@ -85,11 +86,27 @@ Route::middleware('auth')->group(function () {
     Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
-    Route::delete('/productos/{id}', [ProductoController::class, 'desactivando'])->name('productos.desactivando'); 
+    Route::delete('/productos/{id}', [ProductoController::class, 'desactivando'])->name('productos.desactivando');
     Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
 
 
+    //Administración de ventas
+    Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
+    Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
+    Route::post('/ventas', [VentaController::class, 'store'])->name('ventas.store');
+    Route::get('/ventas/{id}/edit', [VentaController::class, 'edit'])->name('ventas.edit');
+    Route::post('ventas/catalogo', [VentaController::class, 'catalogo'])->name('ventas.catalogo');
+    Route::get('/ventas/catalogo', [VentaController::class, 'mostrarCatalogo'])->name('ventas.catalogo');
+    Route::post('/ventas/agregar-producto', [VentaController::class, 'agregarProducto'])->name('ventas.agregarProducto');
+    Route::get('/ventas/resumen', [VentaController::class, 'mostrarResumen'])->name('ventas.resumen');
+    Route::get('/ventas/tipo', [VentaController::class, 'seleccionarTipo'])->name('ventas.tipo');
+    Route::post('/ventas/procesar', [VentaController::class, 'procesarVenta'])->name('ventas.procesar');
+    Route::get('ventas/{venta}/abono', [VentaController::class, 'realizarAbono'])->name('ventas.abono');
+    Route::get('/ventas/filtrar-productos/{categoria?}', [VentaController::class, 'filtrarPorCategoria']);
+    Route::post('/ventas/agregar-al-carrito/{productoId}', [VentaController::class, 'agregarProducto']);
+    Route::get('/ventas/ver-carrito', [VentaController::class, 'verCarrito']);
+    Route::get('/ventas/eliminar-del-carrito/{productoId}', [VentaController::class, 'eliminarDelCarrito']);
 });
 
 // Rutas de autenticación
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
