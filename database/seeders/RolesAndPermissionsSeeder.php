@@ -22,17 +22,41 @@ class RolesAndPermissionsSeeder extends Seeder
             'Crear categorias',
             'Eliminar categorias',
 
-            //Permisos usuarios
-            'Ver usuarios',
-            'Editar usuarios',
-            'Crear usuarios',
-            'Eliminar usuarios',
+            //Permisos clientes
+            'Ver clientes',
+            'Editar clientes',
+            'Crear clientes',
+            'Eliminar clientes',
+
+            //Permisos productos
+            'Ver productos',
+            'Editar productos',
+            'Crear productos',
+            'Eliminar productos',
+
+            //Permisos proveedores
+            'Ver proveedores',
+            'Editar proveedores',
+            'Crear proveedores',
+            'Eliminar proveedores',
 
             //Permisos roles
             'Ver roles',
             'Editar roles',
             'Crear roles',
-            'Eliminar roles', 
+            'Eliminar roles',
+
+            //Permisos usuarios
+            'Ver usuarios',
+            'Editar usuarios',
+            'Crear usuarios',
+            'Eliminar usuarios',
+            
+            //Permisos dashboard
+            'Ver dashboard',
+            'Editar dashboard',
+            'Crear dashboard',
+            'Eliminar dashboard',
         ];
 
         foreach ($permissions as $permission) {

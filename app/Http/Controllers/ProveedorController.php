@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Ver proveedores')->only('index');
+        $this->middleware('permission:Crear proveedores')->only(['create', 'store']);
+        $this->middleware('permission:Editar proveedores')->only(['edit', 'update']);
+        $this->middleware('permission:Eliminar proveedores')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */
