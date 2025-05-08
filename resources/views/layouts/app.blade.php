@@ -111,7 +111,9 @@
                 </li>
                 @endcan
                 <li class="nav-item mb-2">
-                    <a href="" class="nav-link text-white">
+
+                    <a href="{{ route('ventas.index') }}" class="nav-link text-white {{ request()->routeIs('ventas.*') ? 'active bg-primary' : '' }}">
+
                         Ventas
                     </a>
                 </li>

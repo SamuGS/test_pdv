@@ -39,4 +39,9 @@ class Producto extends Model
     {
         return $this->belongsTo(UnidadMedida::class);
     }
+    // Relación con las ventas
+    public function ventas()
+    {
+        return $this->belongsToMany(Venta::class)->withPivot('cantidad', 'subtotal');
+    }
 }

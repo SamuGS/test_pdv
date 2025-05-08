@@ -13,4 +13,9 @@ class Clientes extends Model
         'direccion',    
         'estado',    
     ];
+
+    public function ventas()
+    {
+        return $this->belongsTo(Venta::class);
+    }
 }
