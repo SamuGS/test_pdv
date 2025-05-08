@@ -48,50 +48,68 @@
             <div class="mb-4">
                 <img src="{{ asset('images/logo_don_valentin.jpeg') }}" alt="Logo de la Empresa" class="img-fluid rounded-circle" style="max-width: 200px;" />
             </div>
-            <ul class="nav nav-pills flex-column">
+            <ul class="nav nav-pills flex-column">                
                 <li class="nav-item mb-2">
                     <a href="{{ route('dashboard') }}" class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-primary' : '' }}">
                         Dashboard
                     </a>
-                </li>
-                <li class="nav-item mb-2">
+                </li>                
 
+                @can('Ver roles')
+                <li class="nav-item mb-2">
                     <a href="{{ route('roles.index') }}" class="nav-link text-white {{ request()->routeIs('roles.*') ? 'active bg-primary' : '' }}">
                         Roles/Permisos
                     </a>
                 </li>
-                <li class="nav-item mb-2">
+                @endcan
 
+                @can('Ver usuarios')
+                <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
                         Usuarios
                     </a>
                 </li>
+                @endcan
+
+                @can('Ver proveedores')
                 <li class="nav-item mb-2">
                     <a href="{{ route('proveedores.index') }}" class="nav-link text-white {{ request()->routeIs('proveedores.*') ? 'active bg-primary' : '' }}">
                         Proveedores
                     </a>
                 </li>
+                @endcan
+
+                @can('Ver clientes')
                 <li class="nav-item mb-2">
                     <a href="{{ route('clientes.index') }}" class="nav-link text-white {{ request()->routeIs('clientes.*') ? 'active bg-primary' : '' }}">
                         Clientes
                     </a>
                 </li>
+                @endcan
+
+                @can('Ver categorias')
                 <li class="nav-item mb-2">
                     <a href="{{ route('categorias.index') }}" class="nav-link text-white {{ request()->routeIs('categorias.*') ? 'active bg-primary' : '' }}">
                         Categorías
                     </a>
                 </li>
+                @endcan
+
+                @can('Ver productos')
                 <li class="nav-item mb-2">
                     <a href="{{ route('productos.index') }}" class="nav-link text-white {{ request()->routeIs('productos.*') ? 'active bg-primary' : '' }}">
                         Productos
-
                     </a>
                 </li>
+                @endcan
+
+                @can('Ver compras')
                 <li class="nav-item mb-2">
                     <a href="{{ route('compras.index') }}" class="nav-link text-white {{ request()->routeIs('compras.*') ? 'active bg-primary' : '' }}">
                         Compras
                     </a>
                 </li>
+                @endcan
                 <li class="nav-item mb-2">
 
                     <a href="{{ route('ventas.index') }}" class="nav-link text-white {{ request()->routeIs('ventas.*') ? 'active bg-primary' : '' }}">

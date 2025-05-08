@@ -6,7 +6,9 @@
     <div class="card cardModulo">
         <div class="encabezadoModulo">
             <h2 class="mb-0">Lista de clientes</h2>
+            @can('Crear clientes')
             <a href="{{ route('clientes.create') }}" class="btn botonNuevo"><i class="bi bi-plus-circle"></i>Agregar cliente</a>
+            @endcan
         </div>
     </div>
     <!-- Card para la tabla de usuarios -->
@@ -14,8 +16,7 @@
         <div class="card-body" style="max-height: 400px; overflow-y: auto;">
          <table class="tablaPersonalizada">
                 <thead>
-                    <tr>
-                        <th>ID</th>
+                    <tr>                        
                         <th>Nombre</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
@@ -25,14 +26,17 @@
                 </thead>
                 <tbody>
                     @foreach($clientes as $clientes)
-                    <tr>
-                        <td>{{ $clientes->id }}</td>
+                    <tr>                        
                         <td>{{ $clientes->nombre }}</td>
                         <td>{{ $clientes->telefono }}</td>
                         <td>{{ $clientes->direccion }}</td>
                         <td>{{ $clientes->estado == '1' ? 'Activado' : 'Desactivado' }}</td>
                         <td class="acciones">
+                            @can('Editar clientes')
                             <a href="{{ route('clientes.edit', $clientes->id) }}" class="btn botonAcciones boton1"><i class="bi bi-pencil-square"></i> Actualizar</a>
+                            @endcan
+
+                            @can('Eliminar clientes')
                             <form action="{{ route('clientes.desactivando', $clientes->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $clientes->id }}">
                                 @csrf
                                 @method('DELETE')
@@ -41,6 +45,7 @@
                                     {{ $clientes->estado == 1 ? 'Desactivar' : 'Activar' }}
                                 </button>
                             </form>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

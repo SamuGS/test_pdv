@@ -7,9 +7,11 @@
     <div class="card cardModulo">
         <div class="encabezadoModulo">
             <h2 class="mb-0">Listado de Categorías</h2>
+            @can('Crear categorias')
             <a href="{{ route('categorias.create') }}" class="btn botonNuevo">
                 <i class="bi bi-plus-circle"></i> Agregar Categoría
             </a>
+            @endcan
         </div>
     </div>
 
@@ -18,8 +20,7 @@
         <div class="card-body" style="max-height: 400px; overflow-y: auto;">
             <table class="tablaPersonalizada">
                 <thead>
-                    <tr>
-                        <th>ID</th>
+                    <tr>                        
                         <th>Nombre</th>
                         <th>Estado</th>
                         <th class="acciones">Acciones</th>
@@ -27,15 +28,17 @@
                 </thead>
                 <tbody>
                     @foreach($categorias as $categoria)
-                    <tr>
-                        <td>{{ $categoria->id }}</td>
+                    <tr>                        
                         <td>{{ $categoria->nombre }}</td>
                         <td>{{ $categoria->estado == '1' ? 'Activado' : 'Desactivado' }}</td>
                         <td class="acciones">
+                            @can('Editar categorias')
                             <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn botonAcciones boton1">
                                 <i class="bi bi-pencil-square"></i> Actualizar
                             </a>
+                            @endcan
 
+                            @can('Eliminar categorias')
                             <form action="{{ route('categorias.desactivando', $categoria->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $categoria->id }}">
                                 @csrf
                                 @method('DELETE')
@@ -44,6 +47,7 @@
                                     {{ $categoria->estado == 1 ? 'Desactivar' : 'Activar' }}
                                 </button>
                             </form>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

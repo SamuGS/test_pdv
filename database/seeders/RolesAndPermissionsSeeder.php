@@ -15,9 +15,7 @@ class RolesAndPermissionsSeeder extends Seeder
     public function run(): void
     {        
         // Crear permisos
-        $permissions = [
-            //Permisos dashboard
-            'Ver dashboard',     
+        $permissions = [             
             
             //Permisos roles
             'Ver roles',

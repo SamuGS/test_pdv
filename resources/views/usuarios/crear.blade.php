@@ -22,7 +22,7 @@
 
                 <!-- Nombre -->
                 <div class="mb-3">
-                    <label for="name" class="form-label">Nombre</label>
+                    <label for="nombre" class="form-label">Nombre</label>
                     <div class="input-group">
                         <span class="input-group-text rounded-start-pill"><i class="bi bi-person-fill"></i></span>
                         <input type="text" class="form-control border-start-0 rounded-end-pill" id="nombre" name="nombre" required placeholder="Nombre de usuario">

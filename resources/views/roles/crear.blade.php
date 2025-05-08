@@ -24,13 +24,15 @@
                 <!-- Permisos con icono -->
                 <div class="mb-3">
                     <label for="permisos" class="form-label">Permisos</label>
-                    <div>
-                        @foreach ($permisos as $permiso)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="permiso_{{ $permiso->id }}" name="permisos[]" value="{{ $permiso->name }}">
-                                <label class="form-check-label" for="permiso_{{ $permiso->id }}">
-                                    {{ $permiso->name }}
-                                </label>
+                    <div class="row">
+                        @foreach ($permisos as $index => $permiso)
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="permiso_{{ $permiso->id }}" name="permisos[]" value="{{ $permiso->name }}">
+                                    <label class="form-check-label" for="permiso_{{ $permiso->id }}">
+                                        {{ $permiso->name }}
+                                    </label>
+                                </div>
                             </div>
                         @endforeach
                     </div>
