@@ -32,7 +32,11 @@
                 <td>{{ $producto->proveedor->nombre ?? 'Sin proveedor' }}</td>
                 <td>{{ $producto->estado == '1' ? 'Activado' : 'Desactivado' }}</td>
                 <td class="acciones">
+                    @can('Editar productos')
                     <a href="{{ route('productos.edit', $producto->id) }}" class="btn botonAcciones boton1"><i class="bi bi-pencil-square"></i>Editar</a>
+                    @endcan
+
+                    @can('Eliminar productos')
                     <form action="{{ route('productos.desactivando', $producto->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $producto->id }}">
                         @csrf
                         @method('DELETE')
@@ -40,6 +44,7 @@
                             <i class="bi {{ $producto->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>{{ $producto->estado == 1 ? 'Desactivar' : 'Activar' }}
                         </button>
                     </form>
+                    @endcan
                 </td>
             </tr>
         @empty

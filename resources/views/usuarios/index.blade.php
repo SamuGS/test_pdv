@@ -44,19 +44,21 @@
                                 @endforeach
                             </td>
                             <td>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn botonAcciones boton1">
-                                    <i class="bi bi-pencil-square"></i> Actualizar
-                                </a>
-                            
-                                <!-- Formulario para Eliminar -->
-                                <form action="{{ route('usuarios.desactivando', $user->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $user->id }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $user->id }}">
-                                        <i class="bi {{ $user->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
-                                        {{ $user->estado == 1 ? 'Desactivar' : 'Activar' }}
-                                    </button>
-                                </form>
+                                @if ($user->name !== 'Administrador')
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn botonAcciones boton1">
+                                        <i class="bi bi-pencil-square"></i> Actualizar
+                                    </a>
+                                
+                                    <!-- Formulario para Eliminar -->
+                                    <form action="{{ route('usuarios.desactivando', $user->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $user->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $user->id }}">
+                                            <i class="bi {{ $user->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
+                                            {{ $user->estado == 1 ? 'Desactivar' : 'Activar' }}
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

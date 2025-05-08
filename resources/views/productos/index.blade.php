@@ -15,9 +15,11 @@
                     <input type="text" id="live-search" class="form-control" placeholder="Buscar productos...">
                 </div>
                 <!-- Botón de Agregar Producto -->
+                @can('Crear productos')
                 <a href="{{ route('productos.create') }}" class="btn botonNuevo">
                     <i class="bi bi-plus-circle"></i> Agregar Producto
                 </a>
+                @endcan
             </div>
         </div>
     </div>

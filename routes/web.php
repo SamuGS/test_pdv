@@ -18,13 +18,13 @@ use App\Http\Controllers\ProductoController;
 
 // Ruta de bienvenida
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Ruta del dashboard
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
 
 // Grupo de rutas protegidas por autenticación
 Route::middleware('auth')->group(function () {
@@ -97,9 +97,6 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/detallecompras/crear/{compra_id}', [DetalleCompraController::class, 'crear'])->name('detallecompras.crear');
-
-
-
 });
 
 // Rutas de autenticación

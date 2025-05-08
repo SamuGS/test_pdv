@@ -33,24 +33,27 @@
                                     <span class="badge bg-primary">{{ $permission->name }}</span>
                                 @endforeach
                             </td>
-                            <td>{{ $role->estado == '1' ? 'Activado' : 'Desactivado' }}</td>
-                            <td class="acciones">
-                                <!-- Botón Actualizar -->                               
-                                <button class="btn botonAcciones boton1" onclick="showPermissions({{ $role->id }}, '{{ $role->name }}')">
-                                    <i class="bi bi-pencil-square"></i> Actualizar
-                                </button>
-                            
-                                <!-- Botón Activar/Desactivar -->
-                                <form action="{{ route('roles.toggleEstado', $role->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $role->id }}">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn botonAcciones boton2 {{ $role->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $role->id }}">
-                                        <i class="bi {{ $role->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
-                                        {{ $role->estado == 1 ? 'Desactivar' : 'Activar' }}
-                                    </button>
-                                </form>
+                            <td>
+                                {{$role->estado == '1' ? 'Activado' : 'Desactivado';}}                                                                                                
                             </td>
+                            <td class="acciones">
+                                @if ($role->name !== 'Administrador')
+                                    <!-- Botón Actualizar -->                               
+                                    <button class="btn botonAcciones boton1" onclick="showPermissions({{ $role->id }}, '{{ $role->name }}')">
+                                        <i class="bi bi-pencil-square"></i> Actualizar
+                                    </button>                                    
                             
+                                <!-- Botón Activar/Desactivar -->                                
+                                    <form action="{{ route('roles.toggleEstado', $role->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $role->id }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn botonAcciones boton2 {{ $role->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $role->id }}">
+                                            <i class="bi {{ $role->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
+                                            {{ $role->estado == 1 ? 'Desactivar' : 'Activar' }}
+                                        </button>
+                                    </form>
+                                @endif
+                            </td>                            
                         </tr>
                     @endforeach
                 </tbody>
@@ -108,26 +111,24 @@
             .then(response => response.json())
             .then(data => {
                 if (data.permissions && data.permissions.length > 0) {
-                    permissionsList.innerHTML = data.permissions.map(permission => `
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="permission_${permission.id}" name="permissions[]"
-                                value="${permission.name}" ${permission.assigned ? 'checked' : ''}>
-                            <label class="form-check-label" for="permission_${permission.id}">
-                                ${permission.name}
-                            </label>
+                    const checkboxesHtml = data.permissions.map(permission => `
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permission_${permission.id}" name="permissions[]"
+                                    value="${permission.name}" ${permission.assigned ? 'checked' : ''}>
+                                <label class="form-check-label" for="permission_${permission.id}">
+                                    ${permission.name}
+                                </label>
+                            </div>
                         </div>
                     `).join('');
+                    permissionsList.innerHTML = `<div class="row">${checkboxesHtml}</div>`;
                 } else {
                     permissionsList.innerHTML = '<p>No hay permisos disponibles.</p>';
                 }
 
-                modal.show(); // Mostrar modal cuando todo esté listo
-            })
-            .catch(error => {
-                console.error('Error al cargar permisos:', error);
-                permissionsList.innerHTML = '<p>Error al cargar permisos.</p>';
                 modal.show();
-            });
+            })
     }
 </script>
 @endsection
