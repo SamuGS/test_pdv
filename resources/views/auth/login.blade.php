@@ -5,6 +5,9 @@
     <title>Login</title>
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             background-color: #fef9ed;
@@ -58,10 +61,9 @@
             color: #1c2b3a;
         }
 
-        .form-control {
-            background-color:  #1c2b3a;;
+        .form-control {            
             border: none;
-        }
+        }        
 
         .btn-login {
             background-color: #f3b340;
@@ -92,12 +94,12 @@
 
         <!-- Lado derecho con formulario -->
         <div class="login-right">
-            <h3>Iniciar sesión</h3>
+            <h3 class="text-center">Iniciar sesión</h3>                 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" name="email" id="email" required autofocus>
+                    <input type="email" class="form-control" name="email" id="email" required autofocus value="{{ old('email') }}">                    
                 </div>
 
                 <div class="mb-3">
@@ -119,6 +121,17 @@
         </div>
     </div>
 </div>
+
+@if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de autenticación',
+            html: `{!! implode('<br>', $errors->all()) !!}`,
+            confirmButtonColor: '#d33'
+        });
+    </script>
+@endif
 
 </body>
 </html>

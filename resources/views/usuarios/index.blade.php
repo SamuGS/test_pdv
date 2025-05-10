@@ -45,7 +45,7 @@
                             </td>
                             <td>
                                 @if ($user->name !== 'Administrador')
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn botonAcciones boton1">
+                                    <a href="{{ route('users.edit', $user->id) }}" id="bnActualizar" class="btn botonAcciones boton1">
                                         <i class="bi bi-pencil-square"></i> Actualizar
                                     </a>
                                 
@@ -53,7 +53,8 @@
                                     <form action="{{ route('usuarios.desactivando', $user->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $user->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $user->id }}">
+                                        <!--<button type="button" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $user->id }}"> -->
+                                        <button type="submit" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" name="btnDesactivar">
                                             <i class="bi {{ $user->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
                                             {{ $user->estado == 1 ? 'Desactivar' : 'Activar' }}
                                         </button>
@@ -69,4 +70,19 @@
         </div>
     </div>
 </div>
+
+    @php
+        $success = session()->pull('success');
+    @endphp
+
+    @section('page_js')
+        @if($success)
+            <script>
+                // Guardar solo si hay mensaje
+                sessionStorage.setItem('successMessage', @json($success));
+            </script>
+        @endif
+
+        <script src="{{ asset('js/alertasUsuarios/index.js') }}"></script>
+    @endsection
 @endsection
