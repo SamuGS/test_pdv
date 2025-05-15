@@ -28,7 +28,7 @@
     <div class="card">
 
 
-        <div class="card-body" style="max-height: 400px; overflow-y: auto; white-space: normal;" id="resultados-productos">
+        <div class="card-body" style="overflow-y: auto; white-space: normal;" id="resultados-productos">
             @include('productos.tabla', ['productos' => $productos])
         </div>
         {{ $productos->appends(['buscar' => request('buscar')])->links('vendor.pagination.bootstrap-5') }}

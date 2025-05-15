@@ -75,7 +75,7 @@
                 <!-- Botones Actualizar y Cancelar -->
                 <div class="d-flex justify-content-between mt-4">
                     <!-- Botón para Actualizar -->
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" class="btn btn-primary" name="btnActualizar">Actualizar</button>
 
                     <!-- Botón Cancelar -->
                     <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancelar</a>
@@ -85,4 +85,20 @@
         </div>
     </div>
 </div>
+
+@php
+    $success = session()->pull('success');
+@endphp
+
+    @section('page_js')
+        @if($success)
+            <script>
+                // Guardar solo si hay mensaje
+                sessionStorage.setItem('successMessage', @json($success));
+            </script>
+        @endif
+
+        <script src="{{ asset('js/alertasUsuarios/editar.js') }}"></script>
+    @endsection
+
 @endsection

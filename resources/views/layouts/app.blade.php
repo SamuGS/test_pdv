@@ -17,11 +17,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-
+    <!-- InputMask CDN -->
+    <script src="https://unpkg.com/inputmask@5.0.8/dist/inputmask.min.js"></script>
+    <script src="https://unpkg.com/inputmask@5.0.8/dist/inputmask.es6.min.js"></script>
+    <script src="https://unpkg.com/inputmask@5.0.8/dist/bundle/inputmask.bundle.min.js"></script>
 
     <!-- SweetAlert2 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -128,7 +130,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="" class="nav-link text-white">
+                    <a href="{{ route('reportes.index') }}" class="nav-link text-white">
                         Reportes
                     </a>
                 </li>
@@ -180,7 +182,7 @@
     </div>
 
     <!-- Bootstrap Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>    
 
     @vite('resources/js/sidebar.js')
     @vite('resources/js/alertas.js')
