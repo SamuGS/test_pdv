@@ -160,6 +160,12 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
+                                <a class="dropdown-item" href="{{ route('respaldo.index') }}">Respaldo</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
                                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                     @csrf
                                     <button type="submit" class="dropdown-item text-danger">Cerrar sesión</button>
