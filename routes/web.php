@@ -15,7 +15,7 @@ use App\Http\Controllers\VentaController;
 use App\Models\Proveedores;
 use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\ProductoController;
-
+use App\Http\Controllers\ReportesController;
 
 // Ruta de bienvenida
 Route::get('/', function () {
@@ -90,8 +90,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/productos/{id}', [ProductoController::class, 'desactivando'])->name('productos.desactivando');
     Route::get('/productos/buscar', [ProductoController::class, 'buscar'])->name('productos.buscar');
 
-
-
     //Administración de ventas
     Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
     Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
@@ -116,6 +114,11 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/detallecompras/crear/{compra_id}', [DetalleCompraController::class, 'crear'])->name('detallecompras.crear');
+
+    //REPORTERIA
+    Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.index');
+    Route::get('/reportes/Inventario', [ReportesController::class, 'repProductos'])->name('reportes.repProductos');
+    Route::get('/reportes/Proveedores', [ReportesController::class, 'repProveedores'])->name('reportes.repProveedores');
 });
 
 // Rutas de autenticación

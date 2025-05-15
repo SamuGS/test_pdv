@@ -24,7 +24,7 @@
                     <label for="telefono" class="form-label">Teléfono</label>
                     <div class="input-group">
                         <span class="input-group-text rounded-start-pill"><i class="bi bi-telephone-plus"></i></span>
-                        <input type="text" class="form-control border-start-0 rounded-end-pill" id="telefono" name="telefono" required placeholder="Teléfono del cliente">
+                        <input type="text" class="form-control border-start-0 rounded-end-pill telefono" id="telefono" name="telefono" required placeholder="Teléfono del cliente">
                     </div>
                 </div>
                 <div class="mb-3">
@@ -45,4 +45,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Inputmask({"mask": "9999-9999"}).mask(document.querySelectorAll(".telefono"));
+        });
+    </script>    
 @endsection

@@ -47,7 +47,7 @@
                                     <form action="{{ route('roles.toggleEstado', $role->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $role->id }}">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" class="btn botonAcciones boton2 {{ $role->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $role->id }}">
+                                        <button type="submit" class="btn botonAcciones boton2 {{ $role->estado == 1 ? 'btn-danger' : 'btn-success' }}" name="btnDesactivar">
                                             <i class="bi {{ $role->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
                                             {{ $role->estado == 1 ? 'Desactivar' : 'Activar' }}
                                         </button>
@@ -88,6 +88,10 @@
   </div>
 </div>
 @endsection
+
+@php
+    $success = session()->pull('success');
+@endphp
 
 @section('page_js')
 <script>
@@ -131,4 +135,13 @@
             })
     }
 </script>
+
+@if($success)
+    <script>
+        // Guardar solo si hay mensaje
+        sessionStorage.setItem('successMessage', @json($success));
+    </script>
+@endif
+
+    <script src="{{ asset('js/alertasRoles/index.js') }}"></script>
 @endsection
