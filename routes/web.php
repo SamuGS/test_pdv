@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\VentaController;
-
 use App\Models\Proveedores;
 use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ReportesController;
+use App\Http\Controllers\BackupController;
 
 // Ruta de bienvenida
 Route::get('/', function () {
@@ -119,6 +119,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.index');
     Route::get('/reportes/Inventario', [ReportesController::class, 'repProductos'])->name('reportes.repProductos');
     Route::get('/reportes/Proveedores', [ReportesController::class, 'repProveedores'])->name('reportes.repProveedores');
+    Route::get('/reportes/Clientes', [ReportesController::class, 'repClientes'])->name('reportes.repClientes');
+
+    //BACKUP
+    Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+    Route::post('/backup/crear', [BackupController::class, 'crearBackup'])->name('backup.crear');
+    Route::post('/backup/restaurar', [BackupController::class, 'restaurarBackup'])->name('backup.restaurar');
 });
 
 // Rutas de autenticación

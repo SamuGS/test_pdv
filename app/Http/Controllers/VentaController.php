@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class VentaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Ver ventas')->only(['index', 'show']);
+        $this->middleware('permission:Crear ventas')->only(['create', 'store']);
+        $this->middleware('permission:Editar ventas')->only(['edit', 'update']);
+        $this->middleware('permission:Eliminar ventas')->only(['destroy', 'desactivando']);
+    }
+
     /**
      * Display a listing of the resource.
      */

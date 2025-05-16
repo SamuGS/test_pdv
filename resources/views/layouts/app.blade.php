@@ -51,16 +51,16 @@
                 <img src="{{ asset('images/logo_don_valentin.jpeg') }}" alt="Logo de la Empresa" class="img-fluid rounded-circle" style="max-width: 200px;" />
             </div>
             <ul class="nav nav-pills flex-column">                
-                <li class="nav-item mb-2">
+                <li class="nav-item mb-2">                    
                     <a href="{{ route('dashboard') }}" class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-primary' : '' }}">
-                        Dashboard
+                        <i class="bi bi-speedometer2"></i> Dashboard
                     </a>
                 </li>                
 
                 @can('Ver roles')
                 <li class="nav-item mb-2">
                     <a href="{{ route('roles.index') }}" class="nav-link text-white {{ request()->routeIs('roles.*') ? 'active bg-primary' : '' }}">
-                        Roles/Permisos
+                        <i class="bi bi-shield-lock-fill"></i> Roles/Permisos
                     </a>
                 </li>
                 @endcan
@@ -68,15 +68,15 @@
                 @can('Ver usuarios')
                 <li class="nav-item mb-2">
                     <a href="{{ route('users.index') }}" class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-primary' : '' }}">
-                        Usuarios
+                        <i class="bi bi-person-fill"></i> Usuarios
                     </a>
                 </li>
                 @endcan
 
                 @can('Ver proveedores')
                 <li class="nav-item mb-2">
-                    <a href="{{ route('proveedores.index') }}" class="nav-link text-white {{ request()->routeIs('proveedores.*') ? 'active bg-primary' : '' }}">
-                        Proveedores
+                    <a href="{{ route('proveedores.index') }}" class="nav-link text-white {{ request()->routeIs('proveedores.*') ? 'active bg-primary' : '' }}">                        
+                        <i class="bi bi-person-vcard-fill"></i> Proveedores
                     </a>
                 </li>
                 @endcan
@@ -84,7 +84,7 @@
                 @can('Ver clientes')
                 <li class="nav-item mb-2">
                     <a href="{{ route('clientes.index') }}" class="nav-link text-white {{ request()->routeIs('clientes.*') ? 'active bg-primary' : '' }}">
-                        Clientes
+                        <i class="bi bi-person-lines-fill"></i> Clientes
                     </a>
                 </li>
                 @endcan
@@ -92,7 +92,7 @@
                 @can('Ver categorias')
                 <li class="nav-item mb-2">
                     <a href="{{ route('categorias.index') }}" class="nav-link text-white {{ request()->routeIs('categorias.*') ? 'active bg-primary' : '' }}">
-                        Categorías
+                        <i class="bi bi-tags-fill"></i> Categorías
                     </a>
                 </li>
                 @endcan
@@ -100,7 +100,7 @@
                 @can('Ver productos')
                 <li class="nav-item mb-2">
                     <a href="{{ route('productos.index') }}" class="nav-link text-white {{ request()->routeIs('productos.*') ? 'active bg-primary' : '' }}">
-                        Productos
+                        <i class="bi bi-box-seam"></i> Productos
                     </a>
                 </li>
                 @endcan
@@ -108,32 +108,38 @@
                 @can('Ver compras')
                 <li class="nav-item mb-2">
                     <a href="{{ route('compras.index') }}" class="nav-link text-white {{ request()->routeIs('compras.*') ? 'active bg-primary' : '' }}">
-                        Compras
+                        <i class="bi bi-cart-check-fill"></i> Compras
                     </a>
                 </li>
                 @endcan
+                @can('Ver ventas')
                 <li class="nav-item mb-2">
-
                     <a href="{{ route('ventas.index') }}" class="nav-link text-white {{ request()->routeIs('ventas.*') ? 'active bg-primary' : '' }}">
-
-                        Ventas
+                        <i class="bi bi-cash-stack"></i> Ventas
                     </a>
                 </li>
+                @endcan
+                @can('Ver facturacion')
                 <li class="nav-item mb-2">
                     <a href="" class="nav-link text-white">
-                        Facturación
+                        <i class="bi bi-receipt-cutoff"></i> Facturación
                     </a>
                 </li>
+                @endcan
+                @can('Ver inventarios')
                 <li class="nav-item mb-2">
                     <a href="" class="nav-link text-white">
-                        Inventarios
+                        <i class="bi bi-archive-fill"></i> Inventarios
                     </a>
                 </li>
+                @endcan
+                @can('Ver reportes')
                 <li class="nav-item mb-2">
                     <a href="{{ route('reportes.index') }}" class="nav-link text-white">
-                        Reportes
+                        <i class="bi bi-file-earmark-text"></i> Reportes
                     </a>
                 </li>
+                @endcan
             </ul>
         </aside>
 
@@ -159,12 +165,14 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('respaldo.index') }}">Respaldo</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            @can('Crear respaldos')
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('backup.index') }}">Respaldo</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            @endcan                            
                             <li>
                                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                     @csrf

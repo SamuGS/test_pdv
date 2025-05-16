@@ -59,7 +59,7 @@
                             <b>CLIENTES</b>
                         </div>
                         <div class="card-footer text-body-secondary">
-                            <a href="" target="_blank">
+                            <a href="{{ route('reportes.repClientes') }}" target="_blank">
                                 <button class="btn btn-danger">CLIENTES EXISTENTES</button>
                             </a>
                         </div>                        

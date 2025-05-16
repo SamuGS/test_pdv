@@ -58,6 +58,33 @@ class RolesAndPermissionsSeeder extends Seeder
             'Editar compras',
             'Crear compras',
             'Eliminar compras',
+
+            //Permisos ventas
+            'Ver ventas',
+            'Editar ventas',
+            'Crear ventas',
+            'Eliminar ventas',
+
+            //Permisos facturacion
+            'Ver facturacion',
+            'Editar facturacion',
+            'Crear facturacion',
+            'Eliminar facturacion',
+
+            //Permisos inventario
+            'Ver inventarios',
+            'Editar inventarios',
+            'Crear inventarios',
+            'Eliminar inventarios',
+
+            //Permisos reportes
+            'Ver reportes',
+            'Editar reportes',
+            'Crear reportes',
+            'Eliminar reportes',
+
+            //Permisos respaldo            
+            'Crear respaldos',            
         ];
 
         foreach ($permissions as $permission) {

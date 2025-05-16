@@ -12,7 +12,7 @@ class ProveedorController extends Controller
         $this->middleware('permission:Ver proveedores')->only('index');
         $this->middleware('permission:Crear proveedores')->only(['create', 'store']);
         $this->middleware('permission:Editar proveedores')->only(['edit', 'update']);
-        $this->middleware('permission:Eliminar proveedores')->only('destroy');
+        $this->middleware('permission:Eliminar proveedores')->only('destroy','desactivando');
     }
 
     /**

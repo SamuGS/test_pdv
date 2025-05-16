@@ -12,7 +12,7 @@ class ClienteController extends Controller
         $this->middleware('permission:Ver clientes')->only(['index', 'show']);
         $this->middleware('permission:Crear clientes')->only(['create', 'store']);
         $this->middleware('permission:Editar clientes')->only(['edit', 'update']);
-        $this->middleware('permission:Eliminar clientes')->only('destroy');
+        $this->middleware('permission:Eliminar clientes')->only('destroy','desactivando');
     }
     /**
      * Display a listing of the resource.
@@ -115,20 +115,20 @@ class ClienteController extends Controller
     
     //ACTUALIZANDO ESTADO A 2 = INACTIVO
     public function desactivando(string $id)
-{
-    // BUSCANDO LA CATEGORIA
-    $clientes = Clientes::findOrFail($id);
+    {
+        // BUSCANDO LA CATEGORIA
+        $clientes = Clientes::findOrFail($id);
 
-    // CAMBIANDO EL ESTADO
-    $clientes->estado = $clientes->estado == '1' ? '0' : '1';
-    $clientes->save();
+        // CAMBIANDO EL ESTADO
+        $clientes->estado = $clientes->estado == '1' ? '0' : '1';
+        $clientes->save();
 
-    // MENSAJE DINÁMICO
-    $mensaje = $clientes->estado == '1' ? 'Cliente activado exitosamente.' : 'Cliente desactivado exitosamente.';
+        // MENSAJE DINÁMICO
+        $mensaje = $clientes->estado == '1' ? 'Cliente activado exitosamente.' : 'Cliente desactivado exitosamente.';
 
-    // RETORNANDO A LA VISTA
-    return redirect()->route('clientes.index')->with('success', $mensaje);
-}
+        // RETORNANDO A LA VISTA
+        return redirect()->route('clientes.index')->with('success', $mensaje);
+    }
     
 }
 

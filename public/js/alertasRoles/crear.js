@@ -5,39 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.reload();
         }
     });
-
-    const botones = document.getElementsByName('btnDesactivar');    
+    
+    const botones = document.getElementsByName('btnCrear');
 
     botones.forEach(boton => {
         boton.addEventListener('click', function (event) {
             event.preventDefault();
 
             Swal.fire({
-                title: '¿Estás seguro?',
-                text: "Esta acción cambiará el estado del usuario.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, continuar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.closest('form').submit();
-                }
-            });
-        });
-    });
-
-    const botones2 = document.getElementsByName('btnActualizar');
-
-    botones2.forEach(boton => {
-        boton.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "Cambiaras los permisos del usuario.",
+                title: '¡Verifica los datos a ingresar!',
+                text: "Confirma si los datos son los correctos.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

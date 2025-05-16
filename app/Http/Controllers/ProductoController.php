@@ -16,7 +16,7 @@ class ProductoController extends Controller
         $this->middleware('permission:Ver productos')->only(['index', 'show']);
         $this->middleware('permission:Crear productos')->only(['create', 'store']);
         $this->middleware('permission:Editar productos')->only(['edit', 'update']);
-        $this->middleware('permission:Eliminar productos')->only('destroy');
+        $this->middleware('permission:Eliminar productos')->only('destroy','desactivando');
     }
 
     /**

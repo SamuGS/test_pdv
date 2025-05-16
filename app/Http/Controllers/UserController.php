@@ -130,13 +130,13 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         // Buscar el usuario por su ID
-        $user = User::findOrFail($id);
+        //$user = User::findOrFail($id);
 
         // Eliminar el usuario
-        $user->delete();
+        //$user->delete();
 
         // Redirigir con un mensaje de éxito
-        return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente.');
+        //return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente.');
     }
 
     public function desactivando(string $id)

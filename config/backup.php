@@ -10,12 +10,12 @@ return [
         'name' => env('APP_NAME', 'laravel-backup'),
 
         'source' => [
-            'files' => [
+            'files' => [                                
                 /*
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    base_path(),
+                    storage_path('app/public/imagenes_productos'),
                 ],
 
                 /*
@@ -26,6 +26,8 @@ return [
                 'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
+                    base_path('tests'),
+                    base_path('.git'),
                 ],
 
                 /*
@@ -43,7 +45,7 @@ return [
                  * Set to `null` to include complete absolute path
                  * Example: base_path()
                  */
-                'relative_path' => null,
+                'relative_path' => base_path(),
             ],
 
             /*

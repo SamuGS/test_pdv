@@ -53,7 +53,7 @@ class RolePermissionController extends Controller
         // Validar los datos de la solicitud
         $validated = $request->validate([
             'nombre' => 'required|string|max:255|unique:roles,name', // Validar el nombre del rol
-            'permisos' => 'nullable|array', // Los permisos son opcionales
+            'permisos' => 'required|array', // Los permisos son opcionales
             'permisos.*' => 'exists:permissions,name', // Validar que los permisos existan por nombre
         ]);
 

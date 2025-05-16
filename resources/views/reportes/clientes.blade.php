@@ -108,17 +108,16 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($proveedores as $proveedor)
+            @forelse ($clientes as $cliente)
                 <tr>                    
-                    <td>{{ $proveedor->nombre }}</td>
-                    <td>{{ $proveedor->direccion }}</td>
-                    <td>{{ $proveedor->telefono }}</td>
-                    <td>{{ $proveedor->email }}</td>                    
-                    <td>{{ $proveedor->estado == '1' ? 'Activo' : 'Inactivo' }}</td>
+                    <td>{{ $cliente->nombre }}</td>                    
+                    <td>{{ $cliente->telefono }}</td>
+                    <td>{{ $cliente->direccion }}</td>                                    
+                    <td>{{ $cliente->estado == '1' ? 'Activo' : 'Inactivo' }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="8">No se encontraron proveedores.</td>
+                    <td colspan="8">No se encontraron clientes.</td>
                 </tr>
             @endforelse
         </tbody>

@@ -19,6 +19,9 @@
                         <span class="input-group-text rounded-start-pill"><i class="bi bi-tag-fill"></i></span>
                         <input type="text" class="form-control border-start-0 rounded-end-pill" id="nombre" name="nombre" required placeholder="Nombre del rol">
                     </div>
+                    @error('nombre')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <!-- Permisos con icono -->
@@ -36,11 +39,14 @@
                             </div>
                         @endforeach
                     </div>
+                    @error('permisos')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <!-- Botones -->
                 <div class="d-flex justify-content-between mt-4">
-                    <button type="button" class="btn btn-main" id="btn-create">Crear rol</button>
+                    <button type="button" class="btn btn-main" id="" name="btnCrear">Crear rol</button>
 
                     <a href="{{ route('roles.index') }}" class="btn btn-secondary-custom">Cancelar</a>
                 </div>
@@ -48,4 +54,19 @@
         </div>
     </div>
 </div>
+@endsection
+
+@php
+    $success = session()->pull('success');
+@endphp
+
+@section('page_js')
+    @if($success)
+        <script>
+            // Guardar solo si hay mensaje
+            sessionStorage.setItem('successMessage', @json($success));
+        </script>
+    @endif
+
+    <script src="{{ asset('js/alertasRoles/crear.js') }}"></script>
 @endsection

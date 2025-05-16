@@ -20,17 +20,19 @@
                                     @csrf
                                     @method('patch')
 
-                                    <!-- Nombre -->
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Nombre</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text rounded-start-pill"><i class="bi bi-person-fill"></i></span>
-                                            <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" required autofocus />
+                                    @if ($user->name !== 'Administrador')
+                                        <!-- Nombre -->
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Nombre</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text rounded-start-pill"><i class="bi bi-person-fill"></i></span>
+                                                <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" required autofocus />
+                                            </div>
+                                            @error('name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('name')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                    @endif
 
                                     <!-- Correo Electrónico -->
                                     <div class="mb-3">

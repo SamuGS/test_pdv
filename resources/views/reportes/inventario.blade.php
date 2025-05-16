@@ -30,7 +30,7 @@
 
         .tabla-info {
             margin: 0 auto;
-            font-size: 12px;
+            font-size: 13px;
             width: 100%;
             border-collapse: separate; /* para que el border-radius funcione bien */
         }
@@ -62,7 +62,7 @@
         }
 
         img.producto-img {
-            width: 50px;
+            width: 100px;
         }
     </style>
 
@@ -82,14 +82,14 @@
     <div class="info-empresa">
         <table class="tabla-info">
             <tr>
-                <td>
-                    <b>Dirección: Calle Ficticia 123, Ciudad Ejemplo</b>
+                <td style="width: 380px;">
+                    <b>Dirección:</b> Avenida Las Arboledas, Mercado Municipal de Antiguo Cuscatlan Este, Local #6, Ciudad Merliot.
                 </td>
                 <td>
-                    <b>Tel: (000) 123-4567 | Email: empresa@correo.com</b>
+                    <b>Contacto:</b> +503 7018-1274 <br> ceciliahernandez1912@outlook.es
                 </td>
                 <td>
-                    <b>Fecha del reporte: {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}</b>
+                    <b>Fecha del reporte:</b><br> {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}
                 </td>
             </tr>
         </table>                                
@@ -123,7 +123,7 @@
                     </td>
                     <td>{{ $producto->nombre }}</td>
                     <td>{{ $producto->descripcion }}</td>
-                    <td>${{ number_format($producto->precio, 2) }}</td>
+                    <td>{{ number_format($producto->precio, 2) }}</td>
                     <td>{{ $producto->stock }}</td>
                     <td>{{ $producto->categoria->nombre ?? 'Sin categoría' }}</td>
                     <td>{{ $producto->proveedor->nombre ?? 'Sin proveedor' }}</td>

@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\Proveedores;
+use App\Models\Clientes;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class ReportesController extends Controller
 {
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('permission:Ver categorias')->only(['index', 'show']);
-        $this->middleware('permission:Crear categorias')->only(['create', 'store']);
-        $this->middleware('permission:Editar categorias')->only(['edit', 'update']);
-        $this->middleware('permission:Eliminar categorias')->only(['destroy', 'desactivando']);
-    }*/
+        $this->middleware('permission:Crear categorias')->only(['repProductos', 'repProveedores','repVentasRealizadas','repClientes']);        
+    }
 
     /**
      * Display a listing of the resource.
@@ -92,5 +91,21 @@ class ReportesController extends Controller
         $pdf = Pdf::loadView('reportes.proveedores', compact('proveedores'))
                     ->setPaper('letter','landscape');        
         return $pdf->stream('Listado de proveedores_'.$hora_fecha.'pdf');
+    }
+
+    //Para obtener todas las ventas realizadas.
+    public function repVentasRealizadas()
+    {
+        
+    }
+
+    //Para obtener todos los clientes.
+    public function repClientes()
+    {
+        $clientes = Clientes::all();
+        $hora_fecha = Carbon::now()->format('d-m-Y_H-i-s');
+        $pdf = Pdf::loadView('reportes.clientes', compact('clientes'))
+                    ->setPaper('letter','landscape');        
+        return $pdf->stream('Listado de clientes_'.$hora_fecha.'pdf');
     }
 }

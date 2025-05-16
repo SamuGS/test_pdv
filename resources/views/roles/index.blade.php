@@ -69,8 +69,8 @@
       <form id="permissions-form" method="POST">
         @csrf
         @method('PUT')
-        <div class="modal-header">
-          <h5 class="modal-title" id="permissionsModalLabel">Editar Permisos para el Rol: <span id="role-name"></span></h5>
+        <div class="modal-header text-bg-dark">
+          <h5 class="modal-title " id="permissionsModalLabel"><b>Editando permisos del rol:</b> <i><span id="role-name"></span></i></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body">
@@ -80,7 +80,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Actualizar Permisos</button>
+          <button type="submit" class="btn btn-danger" name="btnActualizar">Actualizar Permisos</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         </div>
       </form>
