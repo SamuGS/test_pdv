@@ -1,62 +1,109 @@
-<!-- filepath: c:\xampp\htdocs\prueba1\resources\views\usuarios\editar.blade.php -->
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Datos del usuario') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <!-- Formulario de Actualización -->
-                    <form action="{{ route('users.update', $user->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header card-header-custom">
+            <h2 class="mb-0">Editar Datos del Usuario</h2>
+        </div>
+        <div class="card-body">            
+            <!-- Formulario de Actualización -->
+            <form action="{{ route('users.update', $user->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-                        <!-- Nombre -->
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
-                        </div>
-
-                        <!-- Nueva Contraseña -->
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Nueva Contraseña (opcional)</label>
-                            <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
-                        </div>
-
-                        <!-- Confirmar Contraseña -->
-                        <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" autocomplete="new-password">
-                        </div>
-
-                        <!-- Botones -->
-                        <div class="text-center">
-                            <!-- Formulario de Actualización -->
-                            <form action="{{ route('users.update', $user->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="btn btn-primary me-2">Actualizar</button>
-                            </form>
-
-                            <!-- Formulario de Eliminación -->
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
-                        </div>
+                <!-- Nombre -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control border-start-0 rounded-end-pill" id="name" name="name" value="{{ $user->name }}" required>
+                    </div>
+                    @error('name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
-            </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-envelope-fill"></i></span>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                    </div>
+                    @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>                
+
+                <!-- Nueva Contraseña -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Nueva Contraseña (opcional)</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
+                    </div>
+                    @error('password')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div class="mb-3">
+                    <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" autocomplete="new-password">
+                    </div>
+                    @error('password_confirmation')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror 
+                </div>
+
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-person-fill"></i></span>
+                        <select class="form-control" id="rol" name="rol" required>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->name }}" {{ isset($user) && $user->roles->first() && $user->roles->first()->name == $role->name ? 'selected' : '' }}>
+                                    {{ $role->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('rol')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror 
+                </div>
+
+                <!-- Botones Actualizar y Cancelar -->
+                <div class="d-flex justify-content-between mt-4">
+                    <!-- Botón para Actualizar -->
+                    <button type="submit" class="btn btn-primary" name="btnActualizar">Actualizar</button>
+
+                    <!-- Botón Cancelar -->
+                    <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+
         </div>
     </div>
-</x-app-layout>
+</div>
+
+@php
+    $success = session()->pull('success');
+@endphp
+
+    @section('page_js')
+        @if($success)
+            <script>
+                // Guardar solo si hay mensaje
+                sessionStorage.setItem('successMessage', @json($success));
+            </script>
+        @endif
+
+        <script src="{{ asset('js/alertasUsuarios/editar.js') }}"></script>
+    @endsection
+
+@endsection

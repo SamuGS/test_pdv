@@ -1,35 +1,34 @@
-<!-- filepath: c:\xampp\htdocs\prueba1\resources\views\usuarios\editar.blade.php -->
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Datos del usuario') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <!-- Formulario de Actualización -->
-                    <form action="{{ route('categorias.store') }}" method="POST">
-                        @csrf                        
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header card-header-custom">
+            <h2 class="mb-0">Agregar Categoría</h2>
+        </div>
+        <div class="card-body">
+            <!-- Formulario de Crear -->
+            <form action="{{ route('categorias.store') }}" method="POST" id="form-create">
 
-                        <!-- Nombre -->
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
-                        </div>                                                
+                @csrf
 
-                        <!-- Botones -->
-                        <div class="text-center">                            
-                            <!-- Botón de enviar -->
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Crear</button>
-                            </div>
-                        </div>
-                    </form>
+                <!-- Nombre con icono -->
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-start-pill"><i class="bi bi-tag-fill"></i></span>
+                        <input type="text" class="form-control border-start-0 rounded-end-pill" id="nombre" name="nombre" required placeholder="Nombre de la categoría">
+                    </div>
                 </div>
-            </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-end gap-2 mt-4">             
+
+                    <a href="{{ route('categorias.index') }}" class="btn btn-secondary-custom">Cancelar</a>
+                    <button type="button" class="btn btn-main" id="btn-create">Crear categoría</button>
+                </div>
+            </form>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection

@@ -1,47 +1,137 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background-color: #fef9ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        .login-box {
+            border-radius: 15px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .login-left {
+            background-color:  #1c2b3a;
+            color: #fef9ed;
+            padding: 60px 30px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-left h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-left img {
+            max-width: 150px;
+            margin-top: 20px;
+        }
+
+        .login-right {
+            background-color: #7ea4a8;
+            width: 50%;
+            padding: 50px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-right h3 {
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #1c2b3a;
+        }
+
+        .form-control {            
+            border: none;
+        }        
+
+        .btn-login {
+            background-color: #f3b340;
+            color: #fff;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-login:hover {
+            background-color: #dca531;
+        }
+
+        a {
+            color: #1c2b3a;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="login-box">
+        <!-- Lado izquierdo con texto e imagen -->
+        <div class="login-left">
+            <h1>INVENTORY<br>MANAGEMENT<br>SYSTEM</h1>
+            <img src="{{ asset('images/logoPDV.png') }}" alt="Logo" style="width: 10000px; height: auto;">
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <!-- Lado derecho con formulario -->
+        <div class="login-right">
+            <h3 class="text-center">Iniciar sesión</h3>                 
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" name="email" id="email" required autofocus value="{{ old('email') }}">                    
+                </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" name="remember" id="remember">
+                    <label class="form-check-label" for="remember">Recuérdame</label>
+                </div>
+
+                <button type="submit" class="btn btn-login mb-3">Ingresar</button>
+
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+                @endif
+            </form>
         </div>
+    </div>
+</div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+@if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de autenticación',
+            html: `{!! implode('<br>', $errors->all()) !!}`,
+            confirmButtonColor: '#d33'
+        });
+    </script>
+@endif
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+</html>

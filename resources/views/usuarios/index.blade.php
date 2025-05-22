@@ -1,42 +1,88 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Lista de usuarios') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">                    
-                    
-                    <table class="table table-striped table-bordered table-hover text-center">
-                        <thead class="table-dark">
-                            <tr>                                
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($users as $user)
-                                <tr>                                    
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>
-                                        <!-- Aquí puedes agregar botones de acción como editar o eliminar -->
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a>
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                </div>
-            </div>
+@section('content')
+<div class="container">
+    <!-- Card para el botón Agregar Usuario -->
+    <div class="card cardModulo">
+        <div class="encabezadoModulo">
+            <h2 class="mb-0">Listado de Usuarios</h2>
+            <a href="{{ route('users.create') }}" class="btn botonNuevo">
+                <i class="bi bi-plus-circle"></i> Agregar Usuario
+            </a>
         </div>
     </div>
-</x-app-layout>
+
+    <!-- Card para la tabla de usuarios -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="tablaPersonalizada">
+                    <thead>
+                        <tr>                            
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Estado</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr>                            
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                @if($user->estado == 1)
+                                Activo
+                                @else
+                                Inactivo
+                                @endif
+                            </td>
+                            <td>
+                                @foreach($user->getRoleNames() as $role)
+                                    {{ $role }} <!-- Muestra todos los roles del usuario -->
+                                @endforeach
+                            </td>
+                            <td>
+                                @if ($user->name !== 'Administrador')
+                                    <a href="{{ route('users.edit', $user->id) }}" id="bnActualizar" class="btn botonAcciones boton1">
+                                        <i class="bi bi-pencil-square"></i> Actualizar
+                                    </a>
+                                
+                                    <!-- Formulario para Eliminar -->
+                                    <form action="{{ route('usuarios.desactivando', $user->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $user->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <!--<button type="button" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $user->id }}"> -->
+                                        <button type="submit" class="btn botonAcciones boton2 {{ $user->estado == 1 ? 'btn-danger' : 'btn-success' }}" name="btnDesactivar">
+                                            <i class="bi {{ $user->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
+                                            {{ $user->estado == 1 ? 'Desactivar' : 'Activar' }}
+                                        </button>
+                                    </form>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    @php
+        $success = session()->pull('success');
+    @endphp
+
+    @section('page_js')
+        @if($success)
+            <script>
+                // Guardar solo si hay mensaje
+                sessionStorage.setItem('successMessage', @json($success));
+            </script>
+        @endif
+
+        <script src="{{ asset('js/alertasUsuarios/index.js') }}"></script>
+    @endsection
+@endsection

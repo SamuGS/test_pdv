@@ -1,49 +1,59 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Listado de categorias') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">                    
-                    
-                    <table class="table table-striped table-bordered table-hover text-center">
-                        <thead class="table-dark">
-                            <tr>    
-                                <th>ID</th>                            
-                                <th>Nombre</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($categorias as $categoria)
-                                <tr>
-                                    <td>{{ $categoria->id }}</td>                                    
-                                    <td>{{ $categoria->nombre }}</td>
-                                    <td>{{ $categoria->estado }}</td>                                    
-                                    <td>
-                                        <!-- Aquí puedes agregar botones de acción como editar o eliminar -->
-                                        <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-primary">Editar</a>
-                                        <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="mt-4">
-                        <a href="{{ route('categorias.create') }}" class="btn btn-success">Agregar Categoria</a>
-                    </div>
-                    
-                </div>
-            </div>
+@section('content')
+
+<div class="container">
+    <!-- Card para el botón Agregar Categoria -->
+    <div class="card cardModulo">
+        <div class="encabezadoModulo">
+            <h2 class="mb-0">Listado de Categorías</h2>
+            @can('Crear categorias')
+            <a href="{{ route('categorias.create') }}" class="btn botonNuevo">
+                <i class="bi bi-plus-circle"></i> Agregar Categoría
+            </a>
+            @endcan
         </div>
     </div>
-</x-app-layout>
+
+    <!-- Card para la tabla de categorías -->
+    <div class="card">
+        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+            <table class="tablaPersonalizada">
+                <thead>
+                    <tr>                        
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th class="acciones">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($categorias as $categoria)
+                    <tr>                        
+                        <td>{{ $categoria->nombre }}</td>
+                        <td>{{ $categoria->estado == '1' ? 'Activado' : 'Desactivado' }}</td>
+                        <td class="acciones">
+                            @can('Editar categorias')
+                            <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn botonAcciones boton1">
+                                <i class="bi bi-pencil-square"></i> Actualizar
+                            </a>
+                            @endcan
+
+                            @can('Eliminar categorias')
+                            <form action="{{ route('categorias.desactivando', $categoria->id) }}" method="POST" style="display:inline;" id="form-estado-{{ $categoria->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn botonAcciones boton2 {{ $categoria->estado == 1 ? 'btn-danger' : 'btn-success' }}" id="btn-estado-{{ $categoria->id }}">
+                                    <i class="bi {{ $categoria->estado == 1 ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
+                                    {{ $categoria->estado == 1 ? 'Desactivar' : 'Activar' }}
+                                </button>
+                            </form>
+                            @endcan
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
