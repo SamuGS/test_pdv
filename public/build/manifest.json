@@ -21,6 +21,12 @@
     "src": "resources/js/app.js",
     "isEntry": true
   },
+  "resources/js/productos_busqueda.js": {
+    "file": "assets/productos_busqueda-B9QJW68l.js",
+    "name": "productos_busqueda",
+    "src": "resources/js/productos_busqueda.js",
+    "isEntry": true
+  },
   "resources/js/sidebar.js": {
     "file": "assets/sidebar-Cs3ejcc0.js",
     "name": "sidebar",

@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("live-search");t&&t.addEventListener("keyup",function(){const n=this.value;fetch(`/productos/buscar?query=${encodeURIComponent(n)}`).then(e=>e.text()).then(e=>{document.getElementById("resultados-productos").innerHTML=e}).catch(e=>{console.error("Error al buscar productos:",e)})})});
