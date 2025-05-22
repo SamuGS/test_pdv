@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/sidebar.js', // <- Agrega esto
                 'resources/js/alertas.js', // <- Agrega esto
+                'resources/js/productos_busqueda.js', // <- Agrega esto
             ],
             refresh: true,
         }),
