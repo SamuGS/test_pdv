@@ -9,6 +9,12 @@
     "src": "resources/css/global.css",
     "isEntry": true
   },
+  "resources/js/alertas.js": {
+    "file": "assets/alertas-lLTm8YSg.js",
+    "name": "alertas",
+    "src": "resources/js/alertas.js",
+    "isEntry": true
+  },
   "resources/js/app.js": {
     "file": "assets/app-Bo-u61x1.js",
     "name": "app",
