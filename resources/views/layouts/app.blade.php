@@ -186,7 +186,7 @@
 
 
             {{-- Page Content --}}
-            <main class="p-4" style="padding-top: 80px;">
+            <main class="p-4" style="">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
