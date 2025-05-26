@@ -17,7 +17,7 @@
 
     <!-- Card para la tabla de categorías -->
     <div class="card">
-        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+        <div class="card-body" style="overflow-y: auto;">
             <table class="tablaPersonalizada">
                 <thead>
                     <tr>                        
