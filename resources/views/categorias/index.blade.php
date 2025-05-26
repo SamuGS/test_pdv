@@ -18,8 +18,8 @@
     <!-- Card para la tabla de categorías -->
     <div class="card">
         <div class="card-body" style="overflow-y: auto;">
-            <div class="table-responsive tablaResponsiveFix">
-                <table class="tablaPersonalizada">
+            <div class="tablaResponsiveFix">
+                <table class="tablaPersonalizada w-100">
                     <thead>
                         <tr>                        
                             <th>Nombre</th>

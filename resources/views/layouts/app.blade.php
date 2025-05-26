@@ -43,9 +43,9 @@
 </head>
 
 <body class="bg-light">
-    <div class="d-flex flex-column flex-md-row">
+    <div class="wrapper d-flex flex-column flex-md-row overflow-hidden">
         {{-- Sidebar --}}
-        <aside id="sidebar" class="bg-dark text-white p-3 sidebar-custom">
+        <aside id="sidebar" class="bg-dark text-white p-3 sidebar-custom" style="width: 250px; min-width: 250px;">            
             <!-- Logo de la empresa en lugar de texto -->
             <div class="mb-4">
                 <img src="{{ asset('images/logo_don_valentin.jpeg') }}" alt="Logo de la Empresa" class="img-fluid rounded-circle" style="max-width: 200px;" />
@@ -144,11 +144,11 @@
         </aside>
 
         {{-- Main content --}}
-        <div class="flex-grow-1 d-flex flex-column">
+        <div class="flex-grow-1 d-flex flex-column overflow-auto">
             {{-- Topbar --}}
             <nav class="topbar d-flex justify-content-between align-items-center">
                 <!-- Botón hamburguesa para pantallas pequeñas -->
-                <button id="toggle-sidebar" class="btn text-white d-md-none ms-2" style="font-size: 1.5rem; background: none; border: none;">
+                <button id="toggle-sidebar" class="btn text-white d-lg-none ms-2" style="font-size: 1.5rem; background: none; border: none;" ...>
                     ☰
                 </button>
 
@@ -186,7 +186,7 @@
 
 
             {{-- Page Content --}}
-            <main class="p-4 w-100 overflow-auto" style="">
+            <main class="p-4">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
