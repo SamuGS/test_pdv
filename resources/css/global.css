@@ -5,15 +5,37 @@
     --color-verde: #A7B99A;
 }
 
-/* Estilo base del body */
-body {
+/* Base */
+body, html {
     background-color: #F8F9FA;
     font-family: 'Figtree', sans-serif;
+    overflow-x: hidden;
 }
 
-/* Sidebar */
+.flex-grow-1 {
+    min-width: 0;
+}
+
+/* Topbar */
+.topbar {
+    background-color: #1f2937 !important;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', sans-serif;
+    height: 60px;
+}
+
+/* Sidebar base */
 aside.bg-dark {
     background-color: var(--color-azul-oscuro) !important;
+}
+.sidebar-custom {
+    width: 250px;
+    transition: transform 0.3s ease-in-out;
 }
 
 /* Sidebar links */
@@ -29,40 +51,7 @@ aside .nav-link.active {
     color: #fff;
 }
 
-/* Topbar */
-.navbar {
-    background-color: var(--color-beige) !important;
-}
-
-/* Botones personalizados */
-.btn-primary {
-    background-color: var(--color-azul-oscuro);
-    border-color: var(--color-azul-oscuro);
-}
-
-.btn-primary:hover {
-    background-color: var(--color-azul-gris);
-    border-color: var(--color-azul-gris);
-}
-
 /* Card */
-.card {
-    border-color: var(--color-verde);
-}
-
-.topbar {
-    background-color: #1f2937 !important; /* gris oscuro */
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    font-family: 'Segoe UI', sans-serif;
-    height: 60px;
-    
-}
-
 .card {
     background-color: white;
     border-radius: 12px;
@@ -71,40 +60,36 @@ aside .nav-link.active {
     margin-bottom: 1.5rem;
     transition: transform 0.2s ease;
     font-family: 'Segoe UI', sans-serif;
+    border-color: var(--color-verde);
 }
-
 .card:hover {
     transform: scale(1.02);
 }
 
-.sidebar-custom {
-    width: 250px;
-    transition: transform 0.3s ease;
+/* Botones */
+.btn-primary {
+    background-color: var(--color-azul-oscuro);
+    border-color: var(--color-azul-oscuro);
+}
+.btn-primary:hover {
+    background-color: var(--color-azul-gris);
+    border-color: var(--color-azul-gris);
 }
 
-@media (max-width: 768px) {
-    #sidebar {
-        transform: translateX(-100%);
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        z-index: 1050;
-        background-color: var(--color-azul-oscuro);
-    }
-
-    #sidebar.active {
-        transform: translateX(0);
-    }
+/* Tablas con scroll horizontal */
+.tablaResponsiveFix {
+    overflow-x: auto;
+    width: 100%;
+}
+.tablaResponsiveFix table {
+    min-width: 600px;
 }
 
-/* Transición siempre activa para sidebar */
+/* Responsive Sidebar */
 #sidebar {
     transition: transform 0.3s ease-in-out;
 }
-
-/* Responsive behavior */
-@media (max-width: 768px) {
+@media (max-width: 991.98px) {
     #sidebar {
         transform: translateX(-100%);
         position: fixed;
@@ -112,17 +97,22 @@ aside .nav-link.active {
         left: 0;
         height: 100%;
         width: 250px;
-        z-index: 1050;
         background-color: var(--color-azul-oscuro);
-        box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        z-index: 1050;
     }
-
     #sidebar.active {
         transform: translateX(0);
     }
-}
 
-/* Overlay (capa detrás del sidebar en móviles) */
-#sidebar-overlay {
-    display: none;
+    #sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1049;
+    }
 }
