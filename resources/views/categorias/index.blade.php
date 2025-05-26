@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="">
+<div class="container">
     <!-- Card para el botón Agregar Categoria -->
     <div class="card cardModulo">
         <div class="encabezadoModulo">

@@ -43,7 +43,7 @@
 </head>
 
 <body class="bg-light">
-    <div class="d-flex">
+    <div class="d-flex flex-column flex-md-row">
         {{-- Sidebar --}}
         <aside id="sidebar" class="bg-dark text-white p-3 sidebar-custom">
             <!-- Logo de la empresa en lugar de texto -->
@@ -186,7 +186,7 @@
 
 
             {{-- Page Content --}}
-            <main class="p-4" style="">
+            <main class="p-4 w-100 overflow-auto" style="">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
