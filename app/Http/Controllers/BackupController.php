@@ -11,7 +11,7 @@ class BackupController extends Controller
 {
     public function __construct()
     {        
-        $this->middleware('permission:Crear respaldo')->only(['crearBackup']);        
+        $this->middleware('permission:Crear respaldos')->only(['crearBackup']);        
     }
     
     public function index(){        
