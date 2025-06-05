@@ -21,4 +21,4 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-!/public/storage/app/public/imagenes_productos/**
+!/storage/app/public/imagenes_productos/**
